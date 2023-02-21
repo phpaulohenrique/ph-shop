@@ -4,11 +4,11 @@ import { Wrapper } from "@/styles/global"
 import { Container, ContainerLogin } from "@/styles/pages/login"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
-import { useSession } from "next-auth/react"
+// import { useSession } from "next-auth/react"
 import { SignInGoogleButton } from "@/components/SignInGoogleButton"
 
-import { authOptions } from "../api/auth/[...nextauth]"
-import { getServerSession } from "next-auth/next"
+// import { authOptions } from "../api/auth/[...nextauth]"
+// import { getServerSession } from "next-auth/next"
 
 type SignInFormData = {
     email: string
@@ -21,8 +21,6 @@ const signInFormSchema = yup.object().shape({
 })
 
 export default function Login() {
-    const { data } = useSession()
-
     const { register, handleSubmit, formState } = useForm<SignInFormData>({
         resolver: yupResolver(signInFormSchema),
     })

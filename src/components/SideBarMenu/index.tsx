@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import * as Dialog from "@radix-ui/react-dialog"
-import { Container, DialogClose, DialogContent, DialogDescription, DialogOverlay, DialogTitle } from "./styles"
+import { Container, DialogClose, DialogContent, DialogOverlay, DialogTitle } from "./styles"
 import { List, ShoppingCartSimple, X } from "phosphor-react"
 import Link from "next/link"
 import { useCart } from "@/contexts/cart"

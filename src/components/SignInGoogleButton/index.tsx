@@ -1,11 +1,7 @@
-import { getSession, signIn, useSession } from "next-auth/react"
-import { useRouter } from "next/router"
+import { signIn, useSession } from "next-auth/react"
 
-import { api } from "../../lib/axios"
 import { ButtonLoginGoogle } from "./styles"
 import { GoogleLogo } from "phosphor-react"
-import { toast } from "react-toastify"
-import { useEffect } from "react"
 
 // interface ISubscribeButtonProps{
 //     priceId: string;
@@ -13,7 +9,7 @@ import { useEffect } from "react"
 
 export function SignInGoogleButton() {
     // console.log(data)
-    const router = useRouter()
+    // const router = useRouter()
     const { data } = useSession()
 
     // useEffect(() => {

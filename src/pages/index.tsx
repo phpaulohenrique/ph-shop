@@ -8,7 +8,6 @@ import { stripe } from "../lib/stripe"
 import { priceFormatter } from "@/util/priceFormatter"
 import { Wrapper } from "@/styles/global"
 import { useRouter } from "next/router"
-import { useSession } from "next-auth/react"
 
 interface IHomeProps {
     products: {
@@ -20,7 +19,7 @@ interface IHomeProps {
 }
 
 export default function Home({ products }: IHomeProps) {
-    const data = useSession()
+    // const data = useSession()
     const router = useRouter()
     // console.log(data)
 
@@ -54,7 +53,7 @@ export default function Home({ products }: IHomeProps) {
                                     </Link>
                                 )
                             })}
-                        {!filteredProducts.length && <span>Ops, we don't have that product!</span>}
+                        {!filteredProducts.length && <span>Ops, we do not have that product!</span>}
                     </ContainerProducts>
                 </Container>
             </Wrapper>

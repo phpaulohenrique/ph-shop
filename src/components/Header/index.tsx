@@ -33,7 +33,7 @@ export function Header() {
         // }
         //     console.log(router.query)
         // }
-    }, [])
+    }, [router])
 
     const handleSearch = (event: FormEvent) => {
         event?.preventDefault()

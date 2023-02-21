@@ -98,7 +98,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     // buscar os produtos mais vendidos / mais acessados
 
     return {
-        paths: [{ params: { id: "prod_NAtPgk8Y7p2EOl" } }],
+        paths: [{ params: { id: "prod_NG86pgNulyIED4" } }],
         fallback: true,
     }
 }
@@ -114,14 +114,15 @@ export const getStaticProps: GetStaticProps<any | undefined, { id: string }> = a
 
         const price = product.default_price as Stripe.Price
 
-        const priceInCentsDifferenceValue = () => Math.floor(Math.random() * 4000)
+        const maxValueInCents = 4000
+        const generateRandomNumber = () => Math.floor(Math.random() * maxValueInCents)
 
         let formattedPrice = null
         let formattedOldPrice = null
         let normalPrice = null
 
         if (price.unit_amount) {
-            formattedOldPrice = priceFormatter(Number(price.unit_amount) + priceInCentsDifferenceValue())
+            formattedOldPrice = priceFormatter(Number(price.unit_amount) + generateRandomNumber())
             formattedPrice = priceFormatter(price.unit_amount)
             normalPrice = price.unit_amount / 1000
         }

@@ -1,4 +1,3 @@
-import { api } from "@/lib/axios"
 import { prisma } from "../../../lib/prisma"
 import NextAuth, { NextAuthOptions } from "next-auth"
 import GoogleProvider from "next-auth/providers/google"
