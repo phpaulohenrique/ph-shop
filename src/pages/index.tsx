@@ -1,6 +1,6 @@
 import { Product } from "@/components/Product"
 import { Container, ContainerProducts } from "@/styles/pages"
-import { GetServerSideProps, GetStaticProps } from "next"
+import { GetStaticProps } from "next"
 import Head from "next/head"
 import Link from "next/link"
 import Stripe from "stripe"
@@ -70,7 +70,7 @@ export default function Home({ products }: IHomeProps) {
 //     }
 // }
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
     const response = await stripe.products.list({
         expand: ["data.default_price"],
     })
@@ -92,6 +92,6 @@ export const getServerSideProps: GetServerSideProps = async () => {
         props: {
             products,
         },
-        // revalidate: 60 * 60 * 24, // 1 day
+        revalidate: 60 * 60 * 24, // 1 day
     }
 }
