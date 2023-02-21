@@ -8,6 +8,10 @@ export const Container = styled("div", {
     // background: "blue",
     paddingBottom: "4rem",
 
+    "> span": {
+        marginBlock: "2rem 1rem",
+    },
+
     h2: {
         color: "$blue500",
     },
@@ -28,9 +32,6 @@ export const CartTable = styled("table", {
     maxWidth: "900px",
     textAlign: "center",
 
-    // border: "1px solid blue",
-    // borderCollapse: "collapse",
-    // borderColor: "$gray500",
     borderSpacing: "0 0.5rem",
 
     th: {
@@ -68,16 +69,6 @@ export const CartTable = styled("table", {
         // background: "red",
     },
 
-    // td: {
-    //     display: "flex",
-    //     gap: ".2rem",
-    //     flexDirection: "row",
-    // },
-
-    // "tr th": {
-    //     width: "30%",
-    // },
-
     "th:nth-child(1)": {
         width: "40%",
     },
@@ -88,6 +79,8 @@ export const CartTable = styled("table", {
         },
         td: {
             height: "10rem",
+            paddingInline: "1rem",
+            fontSize: "$xsm",
         },
     },
 })
@@ -199,21 +192,26 @@ export const ButtonCheckout = styled("button", {
     fontWeight: "500",
     fontSize: "$sm",
     width: "16rem",
+    height: "2.6rem",
+
     // marginLeft: "auto",
     // display: "inline-block",
 
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    gap: ".6rem",
 
     "@bp1": {
         width: "10rem",
     },
 
-    svg: {
-        animation: `${rotate} 1s infinite`,
-        width: "1.4rem",
-        // height: "1.4rem",
+    "&.loading": {
+        svg: {
+            animation: `${rotate} 1s infinite`,
+            width: "1.4rem",
+            // height: "1.4rem",
+        },
     },
 })
 

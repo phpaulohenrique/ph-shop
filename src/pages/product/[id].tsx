@@ -1,4 +1,11 @@
-import { ImageContainer, ProductContainer, ProductDetails, ContainerPrice, Loading } from "@/styles/pages/product"
+import {
+    ImageContainer,
+    ProductContainer,
+    ProductDetails,
+    ContainerPrice,
+    Loading,
+    ContainerActions,
+} from "@/styles/pages/product"
 import { GetStaticPaths, GetStaticProps } from "next"
 import Head from "next/head"
 import Image from "next/image"
@@ -28,7 +35,7 @@ interface IProductProps {
 }
 
 export default function Product({ product }: IProductProps) {
-    const { isFallback } = useRouter()
+    const { isFallback, push } = useRouter()
 
     const { addProduct, cart } = useCart()
 
@@ -36,9 +43,12 @@ export default function Product({ product }: IProductProps) {
 
     const isTheCurrentProductInTheCart = cart.findIndex((product) => product.id === id) >= 0
 
-    const handleAddToCart = () => {
+    const handleAddToCart = (redirectToCart: boolean = false) => {
         addProduct(product)
         toast.success("Added to cart!")
+        if (redirectToCart) {
+            push("/cart")
+        }
     }
 
     // return <Loading>Loading...</Loading>
@@ -61,7 +71,7 @@ export default function Product({ product }: IProductProps) {
                 <ProductContainer>
                     <ImageContainer>
                         <Link href="/" title="Back to catalog">
-                            <CaretLeft size={32} weight="bold" color="#7b7ad1" />
+                            <CaretLeft size={32} weight="bold" color="#637abf" />
                         </Link>
                         <Image src={product.imageUrl} width={380} height={380} alt={product.name} quality={100} />
 
@@ -79,13 +89,20 @@ export default function Product({ product }: IProductProps) {
                             <span>{product.formattedPrice}</span>
                         </ContainerPrice>
 
-                        <button disabled={false} onClick={handleAddToCart}>
-                            {isTheCurrentProductInTheCart ? "Product in Cart" : "Add to Cart"}
-                        </button>
+                        <ContainerActions>
+                            <button disabled={false} onClick={() => handleAddToCart} title="Add to cart">
+                                {isTheCurrentProductInTheCart ? "Product in Cart" : "Add to Cart"}
+                            </button>
+
+                            <button className="primary" onClick={() => handleAddToCart(true)} title="Buy now">
+                                Buy Now
+                            </button>
+                        </ContainerActions>
+
                         <p>
-                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Inventore tempore quas modi qui.
-                            Culpa, laboriosam quod provident dicta cumque recusandae, inventore debitis unde repellat
-                            odio, itaque possimus excepturi expedita dolore
+                            Description: Lorem ipsum dolor sit, amet consectetur adipisicing elit. Inventore tempore
+                            quas modi qui. Culpa, laboriosam quod provident dicta cumque recusandae, inventore debitis
+                            unde repellat odio, itaque possimus excepturi expedita dolore
                         </p>
                     </ProductDetails>
                 </ProductContainer>
@@ -119,12 +136,12 @@ export const getStaticProps: GetStaticProps<any | undefined, { id: string }> = a
 
         let formattedPrice = null
         let formattedOldPrice = null
-        let normalPrice = null
+        // let normalPrice = null
 
         if (price.unit_amount) {
             formattedOldPrice = priceFormatter(Number(price.unit_amount) + generateRandomNumber())
             formattedPrice = priceFormatter(price.unit_amount)
-            normalPrice = price.unit_amount / 1000
+            // normalPrice = price.unit_amount / 1000
         }
 
         return {
@@ -137,7 +154,7 @@ export const getStaticProps: GetStaticProps<any | undefined, { id: string }> = a
                     defaultPriceId: price.id,
 
                     oldPrice: formattedOldPrice,
-                    price: normalPrice,
+                    price: price.unit_amount,
                     formattedPrice,
                 },
             },

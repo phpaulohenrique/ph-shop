@@ -8,6 +8,7 @@ import { stripe } from "../lib/stripe"
 import { priceFormatter } from "@/util/priceFormatter"
 import { Wrapper } from "@/styles/global"
 import { useRouter } from "next/router"
+// import { ButtonBackToCatalog } from "@/components/ButtonBackToCatalog"
 
 interface IHomeProps {
     products: {
@@ -53,7 +54,12 @@ export default function Home({ products }: IHomeProps) {
                                     </Link>
                                 )
                             })}
-                        {!filteredProducts.length && <span>Ops, we do not have that product!</span>}
+                        {!filteredProducts.length && (
+                            <>
+                                <span>Ops, we do not have that product!</span>
+                                {/* <ButtonBackToCatalog className="catalog" /> */}
+                            </>
+                        )}
                     </ContainerProducts>
                 </Container>
             </Wrapper>

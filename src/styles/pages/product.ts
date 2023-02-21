@@ -68,18 +68,7 @@ export const ProductDetails = styled("div", {
         color: "$green500",
         fontWeight: "bold",
     },
-    button: {
-        marginBlock: "1rem 1.6rem",
-        backgroundColor: "$blue300",
-        border: 0,
-        color: "$white",
-        borderRadius: 6,
-        padding: ".8rem",
-        cursor: "pointer",
-        fontWeight: "500",
-        fontSize: "$sm",
-        width: "10rem",
-    },
+
     p: {
         marginTop: "2.5rem",
         color: "$gray700",
@@ -121,5 +110,47 @@ export const Loading = styled("div", {
 
     svg: {
         animation: `${rotate} 800ms infinite`,
+    },
+})
+
+export const ContainerActions = styled("div", {
+    display: "flex",
+    gap: "1rem",
+    marginTop: "1.4rem",
+
+    button: {
+        color: "$blue300",
+        height: "2.6rem",
+        background: "transparent",
+        border: "1px solid $blue500",
+
+        borderRadius: 6,
+        padding: ".8rem",
+        cursor: "pointer",
+        fontWeight: "500",
+        fontSize: "$sm",
+        width: "9rem",
+
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+
+        "&.primary": {
+            backgroundColor: "$blue300",
+
+            color: "$white",
+            border: 0,
+            borderRadius: 6,
+            padding: ".6rem",
+            cursor: "pointer",
+            fontWeight: "500",
+            fontSize: "$sm",
+            // width: "10rem",
+            // marginLeft: "auto",
+            textDecoration: "none",
+            gap: "0.6rem",
+            height: "2.6rem",
+            width: "7rem",
+        },
     },
 })
