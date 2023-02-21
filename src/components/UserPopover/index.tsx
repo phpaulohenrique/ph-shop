@@ -1,7 +1,6 @@
 import * as Popover from "@radix-ui/react-popover"
-import { PopoverTrigger, PopoverContent, PopoverArrow, PopoverClose, Container } from "./styles"
-import { SignOut, User, UserCircle, X } from "phosphor-react"
-import { useCart } from "@/contexts/cart"
+import { PopoverTrigger, PopoverContent, Container } from "./styles"
+import { SignOut, User, UserCircle } from "phosphor-react"
 import { signOut, useSession } from "next-auth/react"
 import Link from "next/link"
 
@@ -21,25 +20,25 @@ export function UserPopover() {
                     <Container>
                         {status === "unauthenticated" ? (
                             <>
-                                <span>You aren't signed in</span>
+                                <span>You are not signed in</span>
                                 <Link href="/login">
                                     <button type="button">
-                                        <UserCircle />
+                                        <UserCircle weight="light" />
                                         Sign in
                                     </button>
                                 </Link>
                             </>
                         ) : (
                             <>
-                                <span>Hi, {data?.user?.name}</span>
-                                <Link href="/user-account">
+                                <span> Hey, {data?.user?.name}</span>
+                                <Link href="/me">
                                     <button type="button">
-                                        <UserCircle />
+                                        <UserCircle weight="light" />
                                         My account
                                     </button>
                                 </Link>
                                 <button type="button" onClick={() => signOut()}>
-                                    <SignOut />
+                                    <SignOut weight="light" />
                                     Sign out
                                 </button>
                             </>

@@ -1,31 +1,46 @@
+import { keyframes } from "@stitches/react"
 import { styled } from "../styles"
 
 export const ProductContainer = styled("main", {
     display: "grid",
     gridTemplateColumns: "1fr 1fr",
     // alignItems: "stretch",
-    gap: "2rem",
+    gap: "1rem",
+    // maxWidth: "100vw",
 
-    // maxWidth: 1180,
-    // margin: "0 auto",
-    // background: "blue",
+    "@bp1": {
+        gridTemplateColumns: "1fr",
+    },
 })
 
 export const ImageContainer = styled("div", {
     width: "100%",
-    // maxWidth: 576,
-    // height: 356,
+
     borderRadius: 8,
-    // background: "linear-gradient(180deg, #1ea483 0%, #7465d4 100% )",
 
     display: "flex",
-    alignItems: "center",
+    alignItems: "flex-start",
     justifyContent: "center",
-    flexDirection: "column",
+    flexDirection: "row",
+    gap: "1.4rem",
 
     img: {
         objectFit: "cover",
         borderRadius: 8,
+
+        "&:hover": {
+            scale: "110%",
+        },
+    },
+
+    "@bp1": {
+        flexDirection: "column",
+
+        img: {
+            alignSelf: "center",
+            width: "16rem",
+            height: "16rem",
+        },
     },
 })
 
@@ -47,21 +62,14 @@ export const ProductDetails = styled("div", {
     },
 
     span: {
-        marginTop: "1rem",
+        marginTop: ".2rem",
         display: "block",
         fontSize: "$2xl",
         color: "$green500",
         fontWeight: "bold",
     },
-    p: {
-        marginTop: "2.5rem",
-        color: "$gray700",
-        fontSize: "$sm",
-        lineHeight: 1.6,
-    },
-
     button: {
-        marginTop: "auto",
+        marginBlock: "1rem 1.6rem",
         backgroundColor: "$blue300",
         border: 0,
         color: "$white",
@@ -71,26 +79,14 @@ export const ProductDetails = styled("div", {
         fontWeight: "500",
         fontSize: "$sm",
         width: "10rem",
-
-        // "&:disabled": {
-        //     opacity: 0.5,
-        //     cursor: "not-allowed",
-        // },
-
-        // "&:not(:disabled):hover": {
-        //     backgroundColor: "$blue500",
-        //     transition: "background 0.2s",
-        // },
+    },
+    p: {
+        marginTop: "2.5rem",
+        color: "$gray700",
+        fontSize: "$sm",
+        lineHeight: 1.6,
     },
 })
-
-// export const TextOldPrice = styled("span", {
-//     marginTop: "1rem",
-//     display: "block",
-//     fontSize: "$sm",
-//     color: "$gray500",
-//     fontWeight: "400",
-// })
 
 export const ContainerPrice = styled("div", {
     // display: 'flex',
@@ -111,5 +107,19 @@ export const ContainerPrice = styled("div", {
         fontSize: "$2xl",
         color: "$green500",
         fontWeight: "bold",
+    },
+})
+
+const rotate = keyframes({
+    "100%": { transform: "rotate(360deg)" },
+})
+export const Loading = styled("div", {
+    position: "fixed",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%)",
+
+    svg: {
+        animation: `${rotate} 800ms infinite`,
     },
 })

@@ -2,10 +2,10 @@ import { stripe } from "@/lib/stripe"
 import { NextApiRequest, NextApiResponse } from "next"
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-    console.log(req.body)
+    // console.log(req.body)
     const { products } = req.body
 
-    console.log(products)
+    // console.log(products)
 
     if (req.method !== "POST") {
         return res.status(405).json({ error: "Method not allowed" })

@@ -6,10 +6,17 @@ import { SessionProvider } from "next-auth/react"
 import { ToastContainer } from "react-toastify"
 
 import "react-toastify/dist/ReactToastify.css"
+import { Footer } from "@/components/Footer"
 
 globalStyles()
 
 export default function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
+    // const [search, setSearch] = useState("")
+
+    // const searchProduct = (search: string) => {
+    //     setSearch(search)
+    // }
+
     return (
         <SessionProvider session={session}>
             <ToastContainer
@@ -27,6 +34,7 @@ export default function App({ Component, pageProps: { session, ...pageProps } }:
             <CartProvider>
                 <Header />
                 <Component {...pageProps} />
+                <Footer />
             </CartProvider>
         </SessionProvider>
     )

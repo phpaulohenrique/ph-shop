@@ -4,13 +4,15 @@ import * as Popover from "@radix-ui/react-popover"
 export const Container = styled("div", {
     // marginTop: "1rem",
     display: "flex",
+    position: "relative",
     flexDirection: "column",
-    alignItems: "center",
-    gap: ".6rem",
+    alignItems: "flex-start",
+    gap: ".4rem",
+    // zIndex: 99999,
 
     span: {
-        marginBottom: ".2rem",
-        fontSize: "sm",
+        marginBottom: ".6rem",
+        fontSize: "$xsm",
     },
 
     a: {
@@ -20,16 +22,18 @@ export const Container = styled("div", {
 
     button: {
         // marginTop: "2rem",
+        alignSelf: "flex-start",
         backgroundColor: "transparent",
         color: "$blue300",
         borderRadius: 4,
-        padding: ".4rem",
+        // padding: ".4rem",
         cursor: "pointer",
         fontWeight: "500",
         fontSize: "$xsm",
         // height: "2.4rem",
         width: "100%",
-        border: "1px solid $blue300",
+        // border: "1px solid $blue300",
+        border: 0,
 
         display: "flex",
         alignItems: "center",
@@ -55,25 +59,10 @@ export const PopoverContent = styled(Popover.Content, {
     // borderBottom: "1px solid red",
     // background: "red",
     minWidth: "180px",
-    padding: ".8rem .6rem",
+    padding: ".6rem",
     borderRadius: 8,
     border: "2px solid $gray300",
     background: "$gray200",
 
     // position: "relative",
-})
-
-export const PopoverClose = styled(Popover.Close, {
-    position: "absolute",
-    right: ".6rem",
-    top: ".5rem",
-
-    border: 0,
-    background: "transparent",
-
-    // "&:hover": {
-    //     cursor: "pointer",
-    //     filter: "brightness(.8)",
-    //     transition: "filter 0.2s",
-    // },
 })

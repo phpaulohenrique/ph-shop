@@ -9,21 +9,21 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     const { name, email } = req.body
 
-    const userExists = await prisma.user.findUnique({
+    const customerExists = await prisma.customer.findUnique({
         where: {
             email,
         },
     })
-    if (userExists) {
-        return res.status(200).json(userExists)
+    if (customerExists) {
+        return res.status(200).json(customerExists)
     }
 
-    const user = await prisma.user.create({
+    const customer = await prisma.customer.create({
         data: {
             name,
             email,
         },
     })
 
-    return res.status(201).json(user)
+    return res.status(201).json(customer)
 }

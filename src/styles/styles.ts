@@ -19,12 +19,15 @@ export const { styled, getCssText, globalCss } = createStitches({
             blue500: "#024d78",
         },
         fontSizes: {
-            xsm: ".8rem",
+            xsm: ".875rem",
             sm: "1rem",
             md: "1.125rem",
             lg: "1.25rem",
             xl: "1.5rem",
             "2xl": "2rem",
         },
+    },
+    media: {
+        bp1: "(max-width: 768px)",
     },
 })

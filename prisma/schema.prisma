@@ -1,21 +1,152 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
+// // This is your Prisma schema file,
+// // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-generator client {
-  provider = "prisma-client-js"
-}
+// generator client {
+//   provider = "prisma-client-js"
+// }
+
+// generator erd {
+//   provider = "prisma-erd-generator"
+// }
+
+// datasource db {
+//   provider = "sqlite"
+//   url      = env("DATABASE_URL")
+// }
+
+// model Customer {
+//   id    String @id @default(uuid())
+//   email String @unique
+//   name  String
+
+//   created_at DateTime @default(now())
+//   Order      Order[]
+
+//   @@map("customers")
+// }
+
+// model Order {
+//   id          String    @id @default(uuid())
+//   created_at  DateTime  @default(now())
+//   customer    Customer  @relation(fields: [customI_id], references: [id])
+//   customer_id String
+//   // customerId  String
+//   products    Product[]
+
+//   @@map("orders")
+// }
+
+// model Product {
+//   id          String  @id
+//   name        String
+//   description String?
+//   price       Int
+//   amount      Int
+//   imageUrl    String?
+//   order       Order   @relation(fields: [order_id], references: [id])
+//   order_id    String
+//   // orders      Order[] @relation(references: [id])
+
+//   @@map("products")
+// }
 
 datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
+  provider          = "sqlite"
+  url               = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL") // Only needed when using a cloud provider that doesn't support the creation of new databases, like Heroku. Learn more: https://pris.ly/migrate-shadow
+}
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["referentialActions"] // You won't need this in Prisma 3.X or higher.
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  expires      DateTime
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model User {
-  id    String @id @default(uuid())
-  email String @unique
-  name  String
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
 
+  accounts Account[]
+  sessions Session[]
+  Order    Order[]
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model Order {
+  id         String   @id @default(uuid())
   created_at DateTime @default(now())
 
-  @@map("users")
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+
+  // customerId  String
+
+  OrderProducts OrderProducts[]
+
+  @@map("orders")
+}
+
+model Product {
+  id          String  @id
+  name        String
+  description String?
+  price       Int
+  imageUrl    String?
+
+  // order         Order           @relation(fields: [orderId], references: [id])
+  // orderId       String
+  // orders      Order[] @relation(references: [id])
+  OrderProducts OrderProducts[]
+  // Order         Order?          @relation(fields: [orderId], references: [id])
+  // orderId       String?
+
+  @@map("products")
+}
+
+model OrderProducts {
+  id        String  @id
+  amount    Int
+  product   Product @relation(fields: [productId], references: [id])
+  order     Order   @relation(fields: [orderId], references: [id])
+  productId String
+  orderId   String
+
+  @@map("order_products")
 }

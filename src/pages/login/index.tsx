@@ -1,19 +1,14 @@
 import { Input } from "@/components/Input"
 import * as yup from "yup"
 import { Wrapper } from "@/styles/global"
-import { ButtonLoginGoogle, ButtonSignUp, Container, ContainerLogin } from "@/styles/pages/login"
+import { Container, ContainerLogin } from "@/styles/pages/login"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
-import Link from "next/link"
-import { GoogleLogo } from "phosphor-react"
-import { signIn, useSession } from "next-auth/react"
-import { BuiltInProviderType, RedirectableProviderType } from "next-auth/providers"
-import { api } from "@/lib/axios"
+import { useSession } from "next-auth/react"
 import { SignInGoogleButton } from "@/components/SignInGoogleButton"
 
 import { authOptions } from "../api/auth/[...nextauth]"
 import { getServerSession } from "next-auth/next"
-import { ContextType } from "react"
 
 type SignInFormData = {
     email: string
@@ -27,8 +22,6 @@ const signInFormSchema = yup.object().shape({
 
 export default function Login() {
     const { data } = useSession()
-
-    // console.log(data)
 
     const { register, handleSubmit, formState } = useForm<SignInFormData>({
         resolver: yupResolver(signInFormSchema),
@@ -62,8 +55,6 @@ export default function Login() {
             <Container>
                 <h1>Login</h1>
 
-                {/* <p>{data?.user?.name}</p> */}
-
                 <ContainerLogin>
                     <form onSubmit={handleSubmit(handleSignIn)}>
                         <Input label="E-mail" error={errors.email} type="email" {...register("email")} />
@@ -80,21 +71,21 @@ export default function Login() {
     )
 }
 
-export async function getServerSideProps(context: any) {
-    const session = await getServerSession(context.req, context.res, authOptions)
+// export async function getServerSideProps(context: any) {
+//     const session = await getServerSession(context.req, context.res, authOptions)
 
-    if (session) {
-        return {
-            redirect: {
-                destination: "/user-account",
-                permanent: false,
-            },
-        }
-    }
+//     if (session) {
+//         return {
+//             redirect: {
+//                 destination: "/user-account",
+//                 permanent: false,
+//             },
+//         }
+//     }
 
-    return {
-        props: {
-            session,
-        },
-    }
-}
+//     return {
+//         props: {
+//             session,
+//         },
+//     }
+// }

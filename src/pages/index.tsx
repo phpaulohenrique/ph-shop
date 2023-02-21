@@ -5,8 +5,10 @@ import Head from "next/head"
 import Link from "next/link"
 import Stripe from "stripe"
 import { stripe } from "../lib/stripe"
-import { priceFormatter } from "@/util/priceFormater"
+import { priceFormatter } from "@/util/priceFormatter"
 import { Wrapper } from "@/styles/global"
+import { useRouter } from "next/router"
+import { useSession } from "next-auth/react"
 
 interface IHomeProps {
     products: {
@@ -18,10 +20,24 @@ interface IHomeProps {
 }
 
 export default function Home({ products }: IHomeProps) {
+    const data = useSession()
+    const router = useRouter()
+    // console.log(data)
+
+    const search = router.query?.search ? String(router.query?.search).trim().toUpperCase() : ""
+    // console.log(search)
+    // console.log(products)
+    const filteredProducts = products.filter((product) => product.name.includes(search))
+    console.log(filteredProducts)
+
+    // if (search?.trim()) {
+    //     products.filter((product) => product.name.includes(search)).
+    //     // products = [...filteredProducts]
+    // }
     return (
         <>
             <Head>
-                <title>Home</title>
+                <title>PHShop</title>
             </Head>
             <Wrapper>
                 <Container>
@@ -29,13 +45,16 @@ export default function Home({ products }: IHomeProps) {
                         <p>Filters</p>
                     </aside>
                     <ContainerProducts>
-                        {products.map((product) => {
-                            return (
-                                <Link key={product.id} href={`product/${product.id}`}>
-                                    <Product product={product} />
-                                </Link>
-                            )
-                        })}
+                        {products
+                            .filter((product) => product.name.includes(search))
+                            .map((product) => {
+                                return (
+                                    <Link key={product.id} href={`product/${product.id}`}>
+                                        <Product product={product} />
+                                    </Link>
+                                )
+                            })}
+                        {!filteredProducts.length && <span>Ops, we don't have that product!</span>}
                     </ContainerProducts>
                 </Container>
             </Wrapper>
@@ -47,7 +66,7 @@ export const getStaticProps: GetStaticProps = async () => {
     const response = await stripe.products.list({
         expand: ["data.default_price"],
     })
-    console.log(response.data)
+    // console.log(response.data)
 
     const products = response.data.map((product) => {
         const price = product.default_price as Stripe.Price

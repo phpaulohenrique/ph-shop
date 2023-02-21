@@ -1,24 +1,18 @@
-import {
-    ImageContainer,
-    ProductContainer,
-    ProductDetails,
-    ImagesCarousel,
-    ContainerPrice,
-} from "@/styles/pages/product"
+import { ImageContainer, ProductContainer, ProductDetails, ContainerPrice, Loading } from "@/styles/pages/product"
 import { GetStaticPaths, GetStaticProps } from "next"
 import Head from "next/head"
 import Image from "next/image"
 import Stripe from "stripe"
 import { stripe } from "../../lib/stripe"
-import { priceFormatter } from "@/util/priceFormater"
+import { priceFormatter } from "@/util/priceFormatter"
 import { useRouter } from "next/router"
-import ToastAlert from "@/components/Toast"
 import { useCart } from "@/contexts/cart"
 import { Wrapper } from "@/styles/global"
-import { ToastDemo } from "@/components/ButtonAddProductToCart"
-import { toast, ToastContainer } from "react-toastify"
+import { toast } from "react-toastify"
 
 import "react-toastify/dist/ReactToastify.css"
+import { CaretLeft, CircleNotch } from "phosphor-react"
+import Link from "next/link"
 interface IProductProps {
     product: {
         id: string
@@ -39,7 +33,11 @@ export default function Product({ product }: IProductProps) {
     const { addProduct, cart } = useCart()
 
     if (isFallback) {
-        return <p>Loading...</p>
+        return (
+            <Loading>
+                <CircleNotch size={42} weight="bold" color="#637abf" />
+            </Loading>
+        )
     }
 
     const { id } = product
@@ -51,15 +49,20 @@ export default function Product({ product }: IProductProps) {
         toast.success("Added to cart!")
     }
 
+    // return <Loading>Loading...</Loading>
+
     return (
         <>
             <Head>
-                <title>| Ignite Shop</title>
+                <title>{product.name} | PHShop</title>
             </Head>
 
             <Wrapper>
                 <ProductContainer>
                     <ImageContainer>
+                        <Link href="/" title="Back to catalog">
+                            <CaretLeft size={32} weight="bold" color="#7b7ad1" />
+                        </Link>
                         <Image src={product.imageUrl} width={380} height={380} alt={product.name} quality={100} />
 
                         {/* <ImagesCarousel>
@@ -76,15 +79,14 @@ export default function Product({ product }: IProductProps) {
                             <span>{product.formattedPrice}</span>
                         </ContainerPrice>
 
-                        <p>
-                            Uma nova forma de interação no iPhone. Um recurso essencial de segurança projetado para
-                            salvar vidas. Câmera inovadora de 48 MP que revela detalhes impressionantes. Tudo com a
-                            potência do chip para smartphone que é o máximo.
-                        </p>
                         <button disabled={false} onClick={handleAddToCart}>
-                            {/* { ? "Carregando..." : "Comprar agora"} */}
                             {isTheCurrentProductInTheCart ? "Product in Cart" : "Add to Cart"}
                         </button>
+                        <p>
+                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Inventore tempore quas modi qui.
+                            Culpa, laboriosam quod provident dicta cumque recusandae, inventore debitis unde repellat
+                            odio, itaque possimus excepturi expedita dolore
+                        </p>
                     </ProductDetails>
                 </ProductContainer>
             </Wrapper>
@@ -103,7 +105,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps<any | undefined, { id: string }> = async ({ params }) => {
     const productId = params?.id
-    console.log(productId)
+    // console.log(productId)
 
     if (productId) {
         const product = await stripe.products.retrieve(productId, {
@@ -112,13 +114,17 @@ export const getStaticProps: GetStaticProps<any | undefined, { id: string }> = a
 
         const price = product.default_price as Stripe.Price
 
-        const formattedCurrentPrice = price.unit_amount ? priceFormatter(price.unit_amount) : null
-        const priceInDollar = price?.unit_amount ? price?.unit_amount : null
+        const priceInCentsDifferenceValue = () => Math.floor(Math.random() * 4000)
 
-        let formattedOldPrice = price.unit_amount ? Number(price.unit_amount * 1) : null
-        formattedOldPrice = price.unit_amount ? priceFormatter(price.unit_amount) : null
+        let formattedPrice = null
+        let formattedOldPrice = null
+        let normalPrice = null
 
-        console.log(product)
+        if (price.unit_amount) {
+            formattedOldPrice = priceFormatter(Number(price.unit_amount) + priceInCentsDifferenceValue())
+            formattedPrice = priceFormatter(price.unit_amount)
+            normalPrice = price.unit_amount / 1000
+        }
 
         return {
             props: {
@@ -128,9 +134,10 @@ export const getStaticProps: GetStaticProps<any | undefined, { id: string }> = a
                     imageUrl: product.images[0],
                     description: product.description,
                     defaultPriceId: price.id,
+
                     oldPrice: formattedOldPrice,
-                    formattedPrice: formattedCurrentPrice,
-                    price: priceInDollar,
+                    price: normalPrice,
+                    formattedPrice,
                 },
             },
             revalidate: 60 * 60 * 1, // 1 hour
@@ -139,6 +146,7 @@ export const getStaticProps: GetStaticProps<any | undefined, { id: string }> = a
 
     return {
         redirect: "/",
+
         props: {},
     }
 }

@@ -11,6 +11,9 @@ export const globalStyles = globalCss({
         "-webkit-font-smoothing": "antialiased",
         backgroundColor: "$gray100",
         color: "$gray800",
+        maxWidth: "100vw",
+        // overflow: "hidden",
+        position: "relative",
     },
     "body, input, textarea, button": {
         fontFamily: "Inter, sans-serif",
@@ -27,11 +30,22 @@ export const globalStyles = globalCss({
         filter: "brightness(.8)",
         transition: "filter 0.2s",
     },
+
+    main: {},
 })
 
 export const Wrapper = styled("div", {
     maxWidth: "1180px",
     margin: "0 auto",
-    marginTop: "4rem",
+    marginTop: "8rem",
     padding: "0 1rem",
+
+    paddingBottom: "16rem",
+    minHeight: "100vh",
+
+    // paddingBottom: "50vh",
+
+    "@bp1": {
+        marginTop: "6rem",
+    },
 })

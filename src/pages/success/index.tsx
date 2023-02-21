@@ -33,7 +33,7 @@ export default function Success({ customerName, products }: ISuccessProps) {
 
                     <strong>
                         <CheckCircle size={32} color="#3cc832" weight="fill" />
-                        Payment accept!
+                        Payment approved
                     </strong>
 
                     <span>Thank you for your purchase, {customerName}</span>
@@ -88,7 +88,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
         }
     })
 
-    console.log(productsFormatted)
+    // console.log(productsFormatted)
     // [0] pois nossa aplicacao só permite a compra 1 produto de cada vez, caso contrario precisaria alterar
     return {
         props: {

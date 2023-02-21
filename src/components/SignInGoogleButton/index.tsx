@@ -5,39 +5,78 @@ import { api } from "../../lib/axios"
 import { ButtonLoginGoogle } from "./styles"
 import { GoogleLogo } from "phosphor-react"
 import { toast } from "react-toastify"
+import { useEffect } from "react"
 
 // interface ISubscribeButtonProps{
 //     priceId: string;
 // }
 
 export function SignInGoogleButton() {
-    const { data: session } = useSession()
+    // console.log(data)
     const router = useRouter()
-    console.log("oi")
+    const { data } = useSession()
+
+    // useEffect(() => {
+    //     loginbackend()
+    // }, [data?.user])
+
+    // async function loginbackend() {
+    //     try {
+    //         if (data?.user) {
+    //             const response = await api.post("/users", {
+    //                 name: data?.user?.name,
+    //                 email: data?.user?.email,
+    //             })
+    //             // alert(response)
+    //             console.log(response)
+
+    //             // await router.push("/")
+    //         }
+    //     } catch (err) {
+    //         // alert(err)
+    //         console.log(data)
+    //     }
+    // }
 
     async function handleSignIn() {
-        if (!session) {
-            signIn("google", { redirect: false, callbackUrl: "/" })
-            // console.log("eit")
-            toast.success("Login success!")
+        if (!data?.user) {
+            await signIn("google", { redirect: false, callbackUrl: "/" })
+            // const response = await signIn("google")
+            // loginbackend()
 
-            // await router.push("/user-account")
-            // useRouter().push("/user-account")
+            // toast.success("Login success!")
 
-            return
+            // alert(response)
+
+            // try {
+            //     if (data?.user) {
+            //         const response = await api.post("/users", {
+            //             name: data?.user?.name,
+            //             email: data?.user?.email,
+            //         })
+            //         alert(response)
+            //         await router.push("/")
+            //     }
+            // } catch (err) {
+            //     // alert(err)
+            //     console.log(data)
+            // }
+            // console.log(response)
         }
 
-        try {
-            const response = await api.post("/users", {
-                name: session.user?.name,
-                email: session.user?.email,
-            })
-            console.log("eit")
-
-            // await router.push("/user-account")
-        } catch (err) {
-            alert(err)
-        }
+        // try {
+        //     if (data?.user) {
+        //         const response = await api.post("/users", {
+        //             name: data?.user?.name,
+        //             email: data?.user?.email,
+        //         })
+        //         alert(response)
+        //         await router.push("/")
+        //     }
+        // } catch (err) {
+        //     // alert(err)
+        //     console.log(data)
+        // }
     }
 
     return (

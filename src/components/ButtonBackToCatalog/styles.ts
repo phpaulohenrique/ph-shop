@@ -5,7 +5,7 @@ export const Button = styled("button", {
     border: "1px solid $blue500",
     color: "$blue300",
     borderRadius: 6,
-    padding: ".8rem",
+    padding: ".6rem",
     cursor: "pointer",
     fontWeight: "500",
     fontSize: "$sm",

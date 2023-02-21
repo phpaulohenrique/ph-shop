@@ -16,8 +16,8 @@ export function Product({ product }: IProductProps) {
             <Image src={product.imageUrl} width={160} height={160} alt="" quality={100} />
 
             <ProductInfo>
-                <span>{product.name}</span>
-                <strong>{product.price}</strong>
+                <strong>{product.name}</strong>
+                <span>{product.price}</span>
             </ProductInfo>
         </Container>
     )

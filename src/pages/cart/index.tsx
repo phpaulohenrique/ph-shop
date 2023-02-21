@@ -1,4 +1,4 @@
-import { CircleNotch, Minus, Plus, ShoppingBag, ShoppingBagOpen, Trash, TrashSimple } from "phosphor-react"
+import { CircleNotch, Minus, Plus, TrashSimple } from "phosphor-react"
 import {
     Container,
     CartTable,
@@ -11,27 +11,20 @@ import {
 } from "../../styles/pages/cart"
 import { useCart } from "@/contexts/cart"
 import Image from "next/image"
-import { useEffect, useMemo, useState } from "react"
-import { priceFormatter } from "@/util/priceFormater"
+import { useMemo, useState } from "react"
+import { priceFormatter } from "@/util/priceFormatter"
 import { Wrapper } from "@/styles/global"
-import axios from "axios"
 import { ButtonBackToCatalog } from "@/components/ButtonBackToCatalog"
 import { useSession } from "next-auth/react"
 import { useRouter } from "next/router"
+import { api } from "@/lib/axios"
+import { toast } from "react-toastify"
 
 export default function Cart() {
     const { cart, updateProductAmount, removeProduct } = useCart()
     const { status } = useSession()
     const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] = useState(false)
-
     const router = useRouter()
-
-    // if (typeof window === "undefined") {
-    //     // storagedCart = localStorage.getItem("@PHShop:cart")
-    //     return
-    // }
-    // // useEffect(() => {}, [])
-    // console.log(cart)
 
     const total = useMemo(
         () =>
@@ -45,11 +38,12 @@ export default function Cart() {
         setIsCreatingCheckoutSession(true)
 
         if (status !== "authenticated") {
-            router.push("/login", { query: "redirecttocart=true" })
+            router.push("/login", { query: "redirecttocart" })
+            toast.warning("Sign In with your account")
             return
         }
 
-        console.log(cart)
+        // console.log(cart)
         const cartToCheckout = cart.map((product) => {
             return {
                 price: product.defaultPriceId,
@@ -57,10 +51,10 @@ export default function Cart() {
             }
         })
 
-        console.log(cartToCheckout)
+        // console.log(cartToCheckout)
 
         try {
-            const response = await axios.post("/api/checkout", {
+            const response = await api.post("/checkout", {
                 products: cartToCheckout,
             })
 

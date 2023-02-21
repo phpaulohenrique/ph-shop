@@ -16,6 +16,10 @@ export const Container = styled("div", {
     flexDirection: "column",
     // gridTemplateColumns: "200px 1fr",
     // gap: "2rem",
+
+    "@bp1": {
+        overflow: "auto",
+    },
 })
 
 export const CartTable = styled("table", {
@@ -77,12 +81,21 @@ export const CartTable = styled("table", {
     "th:nth-child(1)": {
         width: "40%",
     },
+
+    "@bp1": {
+        "th:nth-child(1)": {
+            width: "50%",
+        },
+        td: {
+            height: "10rem",
+        },
+    },
 })
 
 export const TdProduct = styled("td", {
     // display: "flex",
     // flexDirection: "column",
-    position: "relative",
+    // position: "relative",
 
     img: {
         borderRadius: 4,
@@ -95,6 +108,15 @@ export const TdProduct = styled("td", {
         fontSize: "$sm",
         position: "absolute",
         marginLeft: "1rem",
+    },
+
+    "@bp1": {
+        span: {
+            position: "initial",
+            margin: 0,
+            fontSize: "$xsm",
+        },
+        // display: "flex",
     },
 })
 
@@ -111,6 +133,11 @@ export const TdAmount = styled("td", {
     // padding: "1rem",
     // width: "100%",
     height: "6rem",
+
+    "@bp1": {
+        flexDirection: "column",
+        gap: ".4rem",
+    },
 })
 
 export const Total = styled("th", {
@@ -150,6 +177,11 @@ export const ButtonHandleAmount = styled("button", {
             },
         },
     },
+
+    "@bp1": {
+        height: "1.8rem",
+        width: "1.8rem",
+    },
 })
 
 const rotate = keyframes({
@@ -162,7 +194,7 @@ export const ButtonCheckout = styled("button", {
     border: 0,
     color: "$white",
     borderRadius: 6,
-    padding: ".8rem",
+    padding: ".6rem",
     cursor: "pointer",
     fontWeight: "500",
     fontSize: "$sm",
@@ -173,6 +205,10 @@ export const ButtonCheckout = styled("button", {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+
+    "@bp1": {
+        width: "10rem",
+    },
 
     svg: {
         animation: `${rotate} 1s infinite`,

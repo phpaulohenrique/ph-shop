@@ -1,23 +1,38 @@
 import { styled } from "@/styles/styles"
+import { keyframes } from "@stitches/react"
 
 export const Container = styled("div", {
-    // background: "red",
     paddingBlock: ".8rem",
-    // borderBottom: "1px solid blue",
     boxShadow: "0px 0px 20px -10px rgba(0,0,0,0.75)",
-    zIndex: 100,
-    // position: "fixed",
+    // zIndex: 10,
     top: 0,
     width: "100%",
-    marginBottom: "4rem",
+    background: "#f2f3f5",
+    // marginBottom: "4rem",
+    paddingInline: "1rem",
+    position: "fixed",
+
+    "@bp1": {
+        // marginBottom: "2rem",
+    },
 })
 
 export const ContainerWrapper = styled("nav", {
     maxWidth: "1200px",
+    // maxWidth: "100vw",
     margin: "0 auto",
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
+
+    "@bp1": {
+        // justifyContent: "space-around",
+
+        img: {
+            width: "4rem",
+            // height: "4rem",
+        },
+    },
 })
 
 export const BoxSearch = styled("label", {
@@ -52,6 +67,17 @@ export const BoxSearch = styled("label", {
             cursor: "pointer",
         },
     },
+
+    "@bp1": {
+        width: "14rem",
+
+        input: {
+            width: "12rem",
+        },
+        button: {
+            width: "2rem",
+        },
+    },
 })
 
 export const ContainerNav = styled("ul", {
@@ -64,35 +90,30 @@ export const ContainerNav = styled("ul", {
         color: "#008490",
     },
 
+    "button:hover": {
+        filter: "none",
+        background: "$gray300",
+        // lineHeight: "0",
+        // fontSize: "0",
+        // padding: ".2rem",
+    },
+
     li: {
         listStyle: "none",
         border: 0,
         // background: "blue",
-        borderRadius: 4,
+        // borderRadius: 4,
         padding: ".2rem",
     },
 
     "li:hover": {
+        filter: "initial !important",
         cursor: "pointer",
-        // filter: "brightness(.7)",
         background: "$gray300",
+        // transition: "filter 0.2s",
     },
 
     "li a:nth-child(1)": {
-        // content: "",
-        // width: "10px",
-        // height: "10px",
-        // padding: "1px",
-        // backgroundColor: "red",
-        // right: 0,
-        // top: 0,
-        // position: "absolute",
-        // content: "\00B7",
-        // width: "50px",
-        // height: "50px",
-        // borderRadius: "50%",
-        // background: "#b83b3b",
-        // display: "inlineBlock",
         position: "relative",
 
         span: {
@@ -106,5 +127,30 @@ export const ContainerNav = styled("ul", {
             position: "absolute",
             color: "transparent",
         },
+    },
+})
+
+const scaleUp = keyframes({
+    "0%": { transform: "translateX(100%)" },
+    "50%": { transform: "translateX(50%)" },
+    "100%": { transform: "translateX(0%)" },
+})
+
+export const MenuRight = styled("div", {
+    background: "blue",
+    width: "60vw",
+    height: "100%",
+    position: "fixed",
+    zIndex: 1,
+    right: 0,
+    top: 0,
+    overflowX: "hidden",
+    transform: "translateX(100%)",
+
+    "&[data-menu-active=true]": {
+        transform: "translateX(0%)",
+        // transition: "all 1000ms",
+        transition: `${scaleUp} 3000ms`,
+        // animationDuration: "1000ms",
     },
 })
