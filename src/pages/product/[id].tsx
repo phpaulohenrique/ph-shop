@@ -32,14 +32,6 @@ export default function Product({ product }: IProductProps) {
 
     const { addProduct, cart } = useCart()
 
-    if (isFallback) {
-        return (
-            <Loading>
-                <CircleNotch size={42} weight="bold" color="#637abf" />
-            </Loading>
-        )
-    }
-
     const { id } = product
 
     const isTheCurrentProductInTheCart = cart.findIndex((product) => product.id === id) >= 0
@@ -50,6 +42,14 @@ export default function Product({ product }: IProductProps) {
     }
 
     // return <Loading>Loading...</Loading>
+
+    if (isFallback) {
+        return (
+            <Loading>
+                <CircleNotch size={42} weight="bold" color="#637abf" />
+            </Loading>
+        )
+    }
 
     return (
         <>
@@ -98,7 +98,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     // buscar os produtos mais vendidos / mais acessados
 
     return {
-        paths: [{ params: { id: "prod_NG86pgNulyIED4" } }],
+        paths: [{ params: { id: "" } }],
         fallback: true,
     }
 }
@@ -147,7 +147,6 @@ export const getStaticProps: GetStaticProps<any | undefined, { id: string }> = a
 
     return {
         redirect: "/",
-
         props: {},
     }
 }

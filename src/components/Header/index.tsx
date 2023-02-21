@@ -20,20 +20,20 @@ export function Header() {
     const mobile = IsMobile()
     // console.log(mobile)
 
-    useEffect(() => {
-        // console.log(window.screen.width)
-        router.push(`/`)
-        // const a = router.query?.search
-        // inputSearchRef.current.value! = "xxx"
+    // useEffect(() => {
+    //     // console.log(window.screen.width)
+    //     router.push(`/`)
+    //     // const a = router.query?.search
+    //     // inputSearchRef.current.value! = "xxx"
 
-        // console.log(router.query?.search)
-        // console.log(inputSearchRef.current)
-        // if (inputSearchRef.current) {
-        //     inputSearchRef.current.value = router.query?.search ? String(router.query?.search) : ""
-        // }
-        //     console.log(router.query)
-        // }
-    }, [router])
+    //     // console.log(router.query?.search)
+    //     // console.log(inputSearchRef.current)
+    //     // if (inputSearchRef.current) {
+    //     //     inputSearchRef.current.value = router.query?.search ? String(router.query?.search) : ""
+    //     // }
+    //     //     console.log(router.query)
+    //     // }
+    // }, [router])
 
     const handleSearch = (event: FormEvent) => {
         event?.preventDefault()
