@@ -23,9 +23,11 @@ import Head from "next/head"
 
 export default function Cart() {
     const { cart, updateProductAmount, removeProduct } = useCart()
-    const { status } = useSession()
+    const { status, data } = useSession()
     const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] = useState(false)
     const router = useRouter()
+
+    console.log(data)
 
     const total = useMemo(
         () =>
@@ -56,7 +58,9 @@ export default function Cart() {
 
         try {
             const response = await api.post("/checkout", {
+                // userId: data.user.
                 products: cartToCheckout,
+                userId: data.user.id,
             })
 
             const { checkoutUrl } = response.data

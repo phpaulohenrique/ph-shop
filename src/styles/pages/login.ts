@@ -7,9 +7,12 @@ export const Container = styled("div", {
         color: "$blue500",
     },
 
-    display: "grid",
-    gridTemplateColumns: "1fr 24rem",
-    gap: "2rem",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "column",
+    // gridTemplateColumns: "1fr 24rem",
+    gap: "1rem",
     // background: "red",
     strong: {
         display: "flex",
@@ -27,6 +30,10 @@ export const ContainerLogin = styled("div", {
     padding: "2rem",
     borderRadius: 4,
     border: "1px solid $gray300",
+    width: "100%",
+    maxWidth: "380px",
+
+    boxShadow: "0px 0px 20px -10px rgba(0,0,0,0.35)",
 
     a: {
         textDecoration: "none",

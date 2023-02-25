@@ -23,12 +23,17 @@ export const authOptions: NextAuthOptions = {
         },
 
         async session({ session, user }) {
-            const customer = "asdas"
-            // customer = await prisma.customer.findUnique({
+            // const customer = "asdas"
+            // const userId = await prisma.user.findUnique({
             //     where: {
-            //         email: session?.user?.email ?? undefined,
+            //         email: user.email ?? undefined,
+            //     },
+            //     select: {
+            //         id: true,
             //     },
             // })
+            // console.log("oooooooooooooooo")
+            console.log(user)
 
             // if (!customer && user.name && user.email) {
             //     customer = await prisma.customer.create({
@@ -40,7 +45,9 @@ export const authOptions: NextAuthOptions = {
             // }
             return {
                 ...session,
-                customer,
+                user,
+                // user: { ...user, imgUrl: user.image },
+                // ...userId,
             }
         },
     },

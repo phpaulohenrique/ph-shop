@@ -57,8 +57,7 @@ datasource db {
 }
 
 generator client {
-  provider        = "prisma-client-js"
-  previewFeatures = ["referentialActions"] // You won't need this in Prisma 3.X or higher.
+  provider = "prisma-client-js"
 }
 
 model Account {
@@ -110,8 +109,8 @@ model VerificationToken {
 }
 
 model Order {
-  id         String   @id @default(uuid())
-  created_at DateTime @default(now())
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
 
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String
@@ -128,25 +127,20 @@ model Product {
   name        String
   description String?
   price       Int
-  imageUrl    String?
+  imgUrl      String?
 
-  // order         Order           @relation(fields: [orderId], references: [id])
-  // orderId       String
-  // orders      Order[] @relation(references: [id])
   OrderProducts OrderProducts[]
-  // Order         Order?          @relation(fields: [orderId], references: [id])
-  // orderId       String?
 
   @@map("products")
 }
 
 model OrderProducts {
-  id        String  @id
+  id        Int      @id @default(autoincrement())
   amount    Int
-  product   Product @relation(fields: [productId], references: [id])
-  order     Order   @relation(fields: [orderId], references: [id])
-  productId String
-  orderId   String
+  product   Product? @relation(fields: [productId], references: [id], onDelete: Cascade)
+  order     Order?   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId String?
+  orderId   Int?
 
   @@map("order_products")
 }
