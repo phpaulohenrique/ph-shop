@@ -53,34 +53,16 @@ export async function prismaSaveOrderBd({ productsBought, userId }: ISaveOrderBd
     const productsBoughtId = productsBought.map((product) => product.id)
     console.log(productsBoughtId)
 
-    // const userId = "clek0lt6y0002450g8lbjssz1"
-
-    // const dataToCheckout = {
-    //     productsBought,
-    //     userId: "clek0lt6y0002450g8lbjssz1",
-    // }
-
     const productsAlreadyRegistered = await prisma.product.findMany({
         where: {
             id: { in: productsBoughtId },
         },
     })
     const productsIdThatAreRegistered = productsAlreadyRegistered.map((product) => product.id)
-    // console.log("xxxxxxxxxxx")
-    // console.log(productsAlreadyRegistered)
-    // console.log("---------------")
-
-    // const intersections = productsId.filter((a) => productsRegistered.map((e) => a.indexOf()))
-
-    // const productsThatAreNotRegistered = productsId.filter((element) =>
-    //     productsRegistered.map((e) => e.indexOf(element) !== -1)
-    // )
 
     const productsIdThatAreNotRegistered = productsBoughtId.filter(function (obj) {
         return productsIdThatAreRegistered.indexOf(obj) === -1
     })
-
-    // console.log(productsIdThatAreNotRegistered)
 
     const productsToBeRegistered = productsBought.filter(
         (product) => productsIdThatAreNotRegistered.indexOf(product.id) !== -1
@@ -89,18 +71,6 @@ export async function prismaSaveOrderBd({ productsBought, userId }: ISaveOrderBd
     const productsAlreadyRegisteredToBeAddedToOrder = productsBought.filter(
         (product) => productsIdThatAreRegistered.indexOf(product.id) !== -1
     )
-    // const productsThatAreNotRegistered = productsId.map((element) => productsRegistered.filter((p) => p.id !== element))
-
-    // console.log("eita")
-    console.log(productsAlreadyRegisteredToBeAddedToOrder)
-    // console.log(productsToBeRegistered)
-    // console.log(intersections)
-
-    // const newProductsRegistered = await prisma.product.create({
-    //     data: {
-    //         productsToBeRegistered,
-    //     },
-    // })
 
     if (productsToBeRegistered.length) {
         await prisma.$transaction(
@@ -148,8 +118,6 @@ export async function prismaSaveOrderBd({ productsBought, userId }: ISaveOrderBd
         return { id: orderProduct.id }
     })
 
-    console.log(orderProductsId)
-
     const orderCreated = await prisma.order.create({
         data: {
             userId,
@@ -162,16 +130,5 @@ export async function prismaSaveOrderBd({ productsBought, userId }: ISaveOrderBd
         },
     })
 
-    console.log(orderCreated)
-
-    // const orderCreated = await prisma.$transaction(
-    //     prisma.order.create({
-    //         data: {
-    //             userId,
-    //             OrderProducts: {
-    //                 connect: orderProducts.map((e) => e.id),
-    //             },
-    //         },
-    //     })
-    // )
+    return orderCreated
 }

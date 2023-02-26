@@ -43,10 +43,10 @@ export default function Product({ product }: IProductProps) {
 
     const isTheCurrentProductInTheCart = cart.findIndex((product) => product.id === id) >= 0
 
-    const handleAddToCart = (redirectToCart: boolean = false) => {
+    const handleAddToCart = (redirectToCart: string = "") => {
         addProduct(product)
         toast.success("Added to cart!")
-        if (redirectToCart) {
+        if (redirectToCart === "redirectToCart") {
             push("/cart")
         }
     }
@@ -90,11 +90,15 @@ export default function Product({ product }: IProductProps) {
                         </ContainerPrice>
 
                         <ContainerActions>
-                            <button disabled={false} onClick={() => handleAddToCart} title="Add to cart">
+                            <button disabled={false} onClick={() => handleAddToCart()} title="Add to cart">
                                 {isTheCurrentProductInTheCart ? "Product in Cart" : "Add to Cart"}
                             </button>
 
-                            <button className="primary" onClick={() => handleAddToCart(true)} title="Buy now">
+                            <button
+                                className="primary"
+                                onClick={() => handleAddToCart("redirectToCart")}
+                                title="Buy now"
+                            >
                                 Buy Now
                             </button>
                         </ContainerActions>
@@ -116,7 +120,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
     return {
         paths: [{ params: { id: "prod_NG86pgNulyIED4" } }, { params: { id: "prod_NG7PXPPp9zB7Jw" } }],
-        fallback: "blocking", // can also be true or 'blocking'
+        fallback: "blocking",
     }
 }
 

@@ -22,7 +22,7 @@ import { toast } from "react-toastify"
 import Head from "next/head"
 
 export default function Cart() {
-    const { cart, updateProductAmount, removeProduct } = useCart()
+    const { cart, updateProductAmount, removeProduct, clearCart } = useCart()
     const { status, data } = useSession()
     const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] = useState(false)
     const router = useRouter()
@@ -65,6 +65,7 @@ export default function Cart() {
 
             const { checkoutUrl } = response.data
             window.location.href = checkoutUrl
+            clearCart()
         } catch (error) {
             // conectar com uma ferramenta de observabilidade (datadog / sentry)
             alert("Falha ao redirecionar para o checkout!")

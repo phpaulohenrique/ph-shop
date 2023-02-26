@@ -1,7 +1,5 @@
-import { prisma } from "@/lib/prisma"
 import { stripe } from "@/lib/stripe"
 import { NextApiRequest, NextApiResponse } from "next"
-import { save } from "../../../services/prisma-save-order-bd"
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     // console.log(req.body)

@@ -18,15 +18,15 @@ interface IOrderProduct {
 }
 
 interface IUserAccountProps {
-    orders: {
+    userOrders: {
         id: string
         createdAt: string
         orderProducts: IOrderProduct[]
     }[]
 }
 
-export default function UserAccount({ orders }: IUserAccountProps) {
-    console.log(orders)
+export default function UserAccount({ userOrders }: IUserAccountProps) {
+    console.log(userOrders)
     const { data } = useSession()
     const router = useRouter()
 
@@ -49,10 +49,10 @@ export default function UserAccount({ orders }: IUserAccountProps) {
                     <ContainerUserOrders>
                         <h3>My Orders</h3>
                         <ul>
-                            {orders.map((order, index) => {
+                            {userOrders?.map((order, index) => {
                                 return (
                                     <li key={order.id}>
-                                        <h4>Order {index + 1}</h4>
+                                        <h4>Order {order.id}</h4>
                                         <time>{order.createdAt}</time>
                                         <div className="products">
                                             {order.orderProducts.map((product) => {
@@ -100,57 +100,30 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
         },
     })
 
-    const productFormatted = userOrders.map((order) => {
-        return {
-            id: order.id,
-            createdAt: new Date(order.createdAt).toLocaleDateString(),
-            orderProducts: order.OrderProducts.map((product) => {
-                return {
-                    id: product.product.id,
-                    name: product.product.name,
-                    price: product.product.price,
-                    imageUrl: product.product.imgUrl,
-                    amount: product.amount,
-                }
-            }),
-        }
-    })
+    let orders = []
 
-    // console.log(productFormatted)
-    const orders = JSON.parse(JSON.stringify(productFormatted))
-
-    // const a = JSON.parse(orders)
-
-    // if (session?.user) {
-    //     try {
-    //         const response = await api.post("/users", {
-    //             email: session.user?.email,
-    //         })
-    //         // alert(response)
-    //         // console.log(response)
-    //         // await router.push("/")
-    //     } catch (err) {
-    //         // alert(err)
-    //         // console.log(err)
-    //     }
-    // }
-
-    // if (session) {
-    //     return {
-    //         redirect: {
-    //             destination: "/user-account",
-    //             permanent: false,
-    //         },
-    //     }
-    // }
-
-    // -----
+    if (userOrders.length) {
+        const productsFormatted = userOrders.map((order) => {
+            return {
+                id: order.id,
+                createdAt: new Date(order.createdAt).toLocaleDateString(),
+                orderProducts: order.OrderProducts.map((product) => {
+                    return {
+                        id: product.product?.id,
+                        name: product.product?.name,
+                        price: product.product?.price,
+                        imageUrl: product.product?.imgUrl,
+                        amount: product.amount,
+                    }
+                }),
+            }
+        })
+        orders = JSON.parse(JSON.stringify(productsFormatted))
+    }
 
     return {
         props: {
-            // session
-
-            orders,
+            userOrders: orders,
         },
     }
 }
