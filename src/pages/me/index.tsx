@@ -20,7 +20,7 @@ interface IOrderProduct {
 interface IUserAccountProps {
     userOrders: {
         id: string
-        createdAt: string
+        // createdAt: string
         orderProducts: IOrderProduct[]
     }[]
 }
@@ -53,7 +53,7 @@ export default function UserAccount({ userOrders }: IUserAccountProps) {
                                 return (
                                     <li key={order.id}>
                                         <h4>Order {order.id}</h4>
-                                        <time>{order.createdAt}</time>
+                                        {/* <time>{order.createdAt}</time> */}
                                         <div className="products">
                                             {order.orderProducts.map((product) => {
                                                 return (
@@ -106,7 +106,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
         const productsFormatted = userOrders.map((order) => {
             return {
                 id: order.id,
-                createdAt: new Date(order.createdAt).toLocaleDateString(),
+                // createdAt: new Date(order.createdAt).toLocaleDateString(),
                 orderProducts: order.OrderProducts.map((product) => {
                     return {
                         id: product.product?.id,
