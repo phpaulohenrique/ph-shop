@@ -51,10 +51,10 @@
 // }
 
 datasource db {
-  provider          = "mysql"
-  url               = env("DATABASE_URL")
-  relationMode      = "prisma"
-  shadowDatabaseUrl = env("SHADOW_DATABASE_URL") // Only needed when using a cloud provider that doesn't support the creation of new databases, like Heroku. Learn more: https://pris.ly/migrate-shadow
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
+  // shadowDatabaseUrl = env("SHADOW_DATABASE_URL") // Only needed when using a cloud provider that doesn't support the creation of new databases, like Heroku. Learn more: https://pris.ly/migrate-shadow
 }
 
 generator client {
@@ -78,6 +78,7 @@ model Account {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
+  @@index([userId])
 }
 
 model Session {
@@ -87,6 +88,8 @@ model Session {
 
   userId String
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
 }
 
 model User {
@@ -120,6 +123,7 @@ model Order {
 
   OrderProducts OrderProducts[]
 
+  @@index([userId])
   @@map("orders")
 }
 
@@ -143,5 +147,7 @@ model OrderProducts {
   productId String?
   orderId   Int?
 
+  @@index([productId])
+  @@index([orderId])
   @@map("order_products")
 }
