@@ -13,6 +13,7 @@ export const Container = styled("main", {
     img: {
         borderRadius: 12,
         overflow: "hidden",
+        border: 0,
     },
 })
 
