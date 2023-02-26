@@ -39,7 +39,6 @@ export default function Product({ product }: IProductProps) {
 
     const { addProduct, cart } = useCart()
 
-
     const { id } = product
 
     const isTheCurrentProductInTheCart = cart.findIndex((product) => product.id === id) >= 0
