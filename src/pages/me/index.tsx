@@ -107,7 +107,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
             return {
                 id: order.id,
                 // createdAt: new Date(order.createdAt).toLocaleDateString(),
-                orderProducts: order.OrderProducts.map((product) => {
+                orderProducts: order.OrderProducts.map((product: any) => {
                     return {
                         id: product.product?.id,
                         name: product.product?.name,
