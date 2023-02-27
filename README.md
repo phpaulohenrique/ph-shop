@@ -8,7 +8,12 @@
 
 Next.js E-commerce
 
+
+
 </h1>
+
+- ✔️ Mobile Responsive
+- ✔️ Accessibility
 
 ## Technologies 🔧
 
