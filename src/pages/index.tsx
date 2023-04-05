@@ -56,7 +56,7 @@ export default function Home({ products }: IHomeProps) {
                             })}
                         {!filteredProducts.length && (
                             <>
-                                <span>Ops, we do not have that product!</span>
+                                <span className="product-not-found">Product not found!</span>
                                 {/* <ButtonBackToCatalog className="catalog" /> */}
                             </>
                         )}

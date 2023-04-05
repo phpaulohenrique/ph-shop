@@ -25,6 +25,10 @@ export const ContainerProducts = styled("main", {
         textDecoration: "none",
     },
 
+    "span.product-not-found": {
+        color: "$gray700",
+    },
+
     "@bp1": {
         justifyContent: "center",
     },

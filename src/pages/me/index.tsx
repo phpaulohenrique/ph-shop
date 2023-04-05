@@ -60,13 +60,13 @@ export default function UserAccount({ userOrders }: IUserAccountProps) {
                                                     <div key={product.id}>
                                                         <Image
                                                             src={product.imageUrl}
-                                                            width={110}
-                                                            height={110}
+                                                            width={80}
+                                                            height={80}
                                                             alt={product.name}
                                                             quality={100}
                                                         />
                                                         <span>{product.name}</span>
-                                                        <span>Quantity: {product.amount}</span>
+                                                        <span>{product.amount} Un.</span>
                                                     </div>
                                                 )
                                             })}
@@ -106,14 +106,14 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
         const productsFormatted = userOrders.map((order) => {
             return {
                 id: order.id,
-                // createdAt: new Date(order.createdAt).toLocaleDateString(),
-                orderProducts: order.OrderProducts.map((product: any) => {
+                createdAt: new Date(order.createdAt).toLocaleDateString(),
+                orderProducts: order.OrderProducts.map((product) => {
                     return {
                         id: product.product?.id,
                         name: product.product?.name,
                         price: product.product?.price,
                         imageUrl: product.product?.imgUrl,
-                        amount: product.amount,
+                        amount: product.amount!,
                     }
                 }),
             }

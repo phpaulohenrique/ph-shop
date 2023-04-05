@@ -3,17 +3,15 @@ import { styled } from "../styles"
 export const Container = styled("main", {
     display: "grid",
     gridTemplateColumns: "8rem 1fr",
-    // alignItems: "stretch",
-    // gap: "2rem",
-
-    // maxWidth: 1180,
-    // margin: "0 auto",
-    // background: "blue",
 
     img: {
         borderRadius: 12,
         overflow: "hidden",
         border: 0,
+    },
+
+    "@bp1": {
+        gridTemplateColumns: " 1fr",
     },
 })
 
@@ -37,7 +35,7 @@ export const ContainerUserOrders = styled("section", {
     // border: "1px solid red",
     marginTop: "1rem",
     paddingTop: "4rem",
-    borderTop: "1px solid  $gray300",
+    borderBottom: "1px solid  $gray300",
 
     h3: {
         color: "$blue500",
@@ -46,6 +44,8 @@ export const ContainerUserOrders = styled("section", {
 
     h4: {
         display: "inline-block",
+        color: "$gray700",
+        fontWeight: 500,
     },
     time: {
         fontSize: "$xsm",
@@ -65,11 +65,11 @@ export const ContainerUserOrders = styled("section", {
 
         li: {
             display: "inline-block",
-            padding: "1.6rem 1.6rem",
-            borderRadius: "8px",
+            padding: "1rem 1.6rem",
+            // borderRadius: "8px",
             // marginTop: "1rem",
 
-            border: "1px solid  $gray300",
+            borderBottom: "1px solid  $gray300",
         },
     },
 
@@ -82,7 +82,7 @@ export const ContainerUserOrders = styled("section", {
         marginTop: "2rem",
 
         span: {
-            fontSize: "$sm",
+            fontSize: "$xsm",
             color: "$gray700",
         },
     },

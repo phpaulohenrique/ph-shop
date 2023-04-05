@@ -1,55 +1,3 @@
-// // This is your Prisma schema file,
-// // learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// generator client {
-//   provider = "prisma-client-js"
-// }
-
-// generator erd {
-//   provider = "prisma-erd-generator"
-// }
-
-// datasource db {
-//   provider = "sqlite"
-//   url      = env("DATABASE_URL")
-// }
-
-// model Customer {
-//   id    String @id @default(uuid())
-//   email String @unique
-//   name  String
-
-//   created_at DateTime @default(now())
-//   Order      Order[]
-
-//   @@map("customers")
-// }
-
-// model Order {
-//   id          String    @id @default(uuid())
-//   created_at  DateTime  @default(now())
-//   customer    Customer  @relation(fields: [customI_id], references: [id])
-//   customer_id String
-//   // customerId  String
-//   products    Product[]
-
-//   @@map("orders")
-// }
-
-// model Product {
-//   id          String  @id
-//   name        String
-//   description String?
-//   price       Int
-//   amount      Int
-//   imageUrl    String?
-//   order       Order   @relation(fields: [order_id], references: [id])
-//   order_id    String
-//   // orders      Order[] @relation(references: [id])
-
-//   @@map("products")
-// }
-
 datasource db {
   provider     = "mysql"
   url          = env("DATABASE_URL")
@@ -67,12 +15,12 @@ model Account {
   type              String
   provider          String
   providerAccountId String
-  refresh_token     String?
-  access_token      String?
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
   expires_at        Int?
   token_type        String?
   scope             String?
-  id_token          String?
+  id_token          String? @db.Text
   session_state     String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -129,8 +77,8 @@ model Order {
 
 model Product {
   id          String  @id
-  name        String
-  description String?
+  name        String @db.Text
+  description String? @db.Text
   price       Int
   imgUrl      String?
 
