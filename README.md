@@ -7,7 +7,7 @@
 <br>
 <br>
 
-Next.js E-commerce
+Next.js FullStack E-commerce
 
 
 
