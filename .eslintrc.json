@@ -1,9 +1,11 @@
 {
-  "extends": ["next/core-web-vitals", "@rocketseat/eslint-config/react"],
-    "rules": {
+  "extends": ["@rocketseat/eslint-config/react","next/core-web-vitals"],
+   "rules": {
     "prettier/prettier": ["error", {
-      "printWidth": 120,
       "tabWidth": 4,
+      "printWidth": 100,
+      "singleQuote": true,
       "semi": false
+      
     }]}
 }

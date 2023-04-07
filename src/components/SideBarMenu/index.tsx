@@ -1,13 +1,19 @@
-import React, { useState } from "react"
-import * as Dialog from "@radix-ui/react-dialog"
-import { Container, DialogClose, DialogContent, DialogOverlay, DialogTitle } from "./styles"
-import { List, ShoppingCartSimple, X } from "phosphor-react"
-import Link from "next/link"
-import { useCart } from "@/contexts/cart"
+import React, { useState } from 'react'
+import * as Dialog from '@radix-ui/react-dialog'
+import { Container, DialogClose, DialogContent, DialogOverlay, DialogTitle } from './styles'
+import { List, ShoppingCartSimple, SignOut, UserCircle, X } from 'phosphor-react'
+import Link from 'next/link'
+import { useCart } from '@/contexts/cart'
+import { signOut, useSession } from 'next-auth/react'
 
 export const SideBarMenu = () => {
     const { cart } = useCart()
     const [open, setOpen] = useState(false)
+
+    const session = useSession()
+    console.log(session.status)
+
+    const unauthenticated = session.status !== 'authenticated'
 
     // const closeMenu = () => {}
 
@@ -20,7 +26,6 @@ export const SideBarMenu = () => {
                 <DialogOverlay />
                 <DialogContent>
                     <DialogTitle>Menu</DialogTitle>
-                    {/* <DialogDescription>Open menu</DialogDescription> */}
                     <Container>
                         <ul>
                             <li>
@@ -32,6 +37,25 @@ export const SideBarMenu = () => {
                                     </Link>
                                 </button>
                                 <span>{!!cart.length && <span>{cart.length} products</span>}</span>
+                            </li>
+
+                            <li>
+                                <button onClick={() => setOpen(false)}>
+                                    <Link href={unauthenticated ? '/login' : '/account'}>
+                                        <UserCircle size={24} />
+                                        {unauthenticated ? 'Login' : 'My Account'}
+                                    </Link>
+                                </button>
+                            </li>
+                            <li>
+                                {!unauthenticated && (
+                                    <button onClick={() => signOut()}>
+                                        <Link href="/cart">
+                                            <SignOut size={24} />
+                                            Logout
+                                        </Link>
+                                    </button>
+                                )}
                             </li>
                         </ul>
                     </Container>

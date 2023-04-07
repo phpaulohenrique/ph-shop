@@ -1,15 +1,15 @@
-import { stripe } from "@/lib/stripe"
-import { Wrapper } from "@/styles/global"
-import { Container, ContainerProducts } from "@/styles/pages/success"
-import { GetServerSideProps } from "next"
-import Head from "next/head"
-import { CheckCircle } from "phosphor-react"
-import Stripe from "stripe"
-import Image from "next/image"
-import { prismaSaveOrderBd } from "../../services/prisma-save-order-bd"
-import { getServerSession } from "next-auth"
-import { authOptions } from "../api/auth/[...nextauth]"
-import ImgNoAvailable from "../../assets/image_not_available.png"
+import { stripe } from '@/lib/stripe'
+import { Wrapper } from '@/styles/global'
+import { Container, ContainerProducts } from '@/pages/success/styles'
+import { GetServerSideProps } from 'next'
+import Head from 'next/head'
+import { CheckCircle } from 'phosphor-react'
+import Stripe from 'stripe'
+import Image from 'next/image'
+import { prismaSaveOrderBd } from '../../services/prisma-save-order-bd'
+import { getServerSession } from 'next-auth'
+import { authOptions } from '../api/auth/[...nextauth].api'
+import ImgNoAvailable from '../../assets/image_not_available.png'
 
 interface IProductBought {
     id: string
@@ -44,14 +44,14 @@ export default function Success({ customerName, products }: ISuccessProps) {
 
             <Wrapper>
                 <Container>
-                    <h1>Successful purchase!</h1>
+                    <h2>Successful purchase!</h2>
 
                     <strong>
                         <CheckCircle size={32} color="#3cc832" weight="fill" />
                         Payment approved
                     </strong>
 
-                    <span>Thank you for your purchase, {customerName}</span>
+                    <span>Thank you, {customerName}!</span>
                     <span>The following products are on the way to your address</span>
 
                     <ContainerProducts>
@@ -85,7 +85,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         return {
             redirect: {
                 permanent: false,
-                destination: "/",
+                destination: '/',
             },
         }
     }
@@ -93,7 +93,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     const sessionId = String(query.session_id)
 
     const session = await stripe.checkout.sessions.retrieve(sessionId, {
-        expand: ["line_items", "line_items.data.price.product"],
+        expand: ['line_items', 'line_items.data.price.product'],
     })
 
     const customerName = session?.customer_details?.name

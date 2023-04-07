@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useContext, useEffect, useRef, useState } from "react"
+import { createContext, ReactNode, useContext, useEffect, useRef, useState } from 'react'
 
 interface CartProviderProps {
     children: ReactNode
@@ -17,7 +17,7 @@ interface IProductInCart {
     total: number
 }
 
-type IProduct = Omit<IProductInCart, "total">
+type IProduct = Omit<IProductInCart, 'total'>
 
 interface UpdateProductAmount {
     productId: string
@@ -38,7 +38,7 @@ export function CartProvider({ children }: CartProviderProps) {
     const [cart, setCart] = useState<IProductInCart[]>([])
 
     const getStorage = () => {
-        const storagedCart = localStorage.getItem("@PHShop:cart")
+        const storagedCart = localStorage.getItem('@PHShop:cart')
 
         if (storagedCart) {
             // console.log(storagedCart)
@@ -62,7 +62,7 @@ export function CartProvider({ children }: CartProviderProps) {
     // bellow to set in localstore whenever it changes
     useEffect(() => {
         if (cartPreviousValue !== cart) {
-            localStorage.setItem("@PHShop:cart", JSON.stringify(cart))
+            localStorage.setItem('@PHShop:cart', JSON.stringify(cart))
         }
     }, [cart, cartPreviousValue])
 
@@ -97,7 +97,9 @@ export function CartProvider({ children }: CartProviderProps) {
             const updatedCart = [...cart]
             // const newUpdatedCart = updatedCart.filter((product) => (product.id !== productId))
 
-            const productToBeRemovedIndex = updatedCart.findIndex((product) => product.id === productId)
+            const productToBeRemovedIndex = updatedCart.findIndex(
+                (product) => product.id === productId
+            )
 
             if (productToBeRemovedIndex >= 0) {
                 updatedCart.splice(productToBeRemovedIndex, 1)
@@ -112,7 +114,7 @@ export function CartProvider({ children }: CartProviderProps) {
             //   return;
             // }
         } catch {
-            alert("Erro na remoção do produto")
+            alert('Erro na remoção do produto')
         }
     }
 
@@ -140,7 +142,7 @@ export function CartProvider({ children }: CartProviderProps) {
 
             // bellow i am acessing the position 0, because the productExists is an array with only one position always
         } catch {
-            alert("Erro na alteração de quantidade do produto")
+            alert('Erro na alteração de quantidade do produto')
         }
     }
 

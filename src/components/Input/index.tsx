@@ -1,6 +1,6 @@
-import { forwardRef, ForwardRefRenderFunction, InputHTMLAttributes } from "react"
-import { FieldError } from "react-hook-form/dist/types"
-import { ErrorMessage, InputContainer, InputStyle } from "./styles"
+import { forwardRef, ForwardRefRenderFunction, InputHTMLAttributes } from 'react'
+import { FieldError } from 'react-hook-form/dist/types'
+import { ErrorMessage, InputContainer, InputStyle } from './styles'
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
     name?: string

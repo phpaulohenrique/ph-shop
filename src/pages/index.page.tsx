@@ -1,13 +1,13 @@
-import { Product } from "@/components/Product"
-import { Container, ContainerProducts } from "@/styles/pages"
-import { GetStaticProps } from "next"
-import Head from "next/head"
-import Link from "next/link"
-import Stripe from "stripe"
-import { stripe } from "../lib/stripe"
-import { priceFormatter } from "@/util/priceFormatter"
-import { Wrapper } from "@/styles/global"
-import { useRouter } from "next/router"
+import { Product } from '@/components/ProductAtHomePage'
+import { Container, ContainerProducts } from '@/pages/styles'
+import { GetStaticProps } from 'next'
+import Head from 'next/head'
+import Link from 'next/link'
+import Stripe from 'stripe'
+import { stripe } from '@/lib/stripe'
+import { priceFormatter } from '@/utils/priceFormatter'
+import { Wrapper } from '@/styles/global'
+import { useRouter } from 'next/router'
 // import { ButtonBackToCatalog } from "@/components/ButtonBackToCatalog"
 
 interface IHomeProps {
@@ -20,20 +20,15 @@ interface IHomeProps {
 }
 
 export default function Home({ products }: IHomeProps) {
-    // const data = useSession()
+    console.log(products)
     const router = useRouter()
-    // console.log(data)
+    const search = router.query?.search ? String(router.query?.search).trim().toUpperCase() : ''
 
-    const search = router.query?.search ? String(router.query?.search).trim().toUpperCase() : ""
-    // console.log(search)
-    // console.log(products)
     const filteredProducts = products.filter((product) => product.name.includes(search))
-    console.log(filteredProducts)
 
-    // if (search?.trim()) {
-    //     products.filter((product) => product.name.includes(search)).
-    //     // products = [...filteredProducts]
-    // }
+    const env = process.env.NODE_ENV
+    console.log(env)
+
     return (
         <>
             <Head>
@@ -57,7 +52,6 @@ export default function Home({ products }: IHomeProps) {
                         {!filteredProducts.length && (
                             <>
                                 <span className="product-not-found">Product not found!</span>
-                                {/* <ButtonBackToCatalog className="catalog" /> */}
                             </>
                         )}
                     </ContainerProducts>
@@ -78,7 +72,7 @@ export default function Home({ products }: IHomeProps) {
 
 export const getStaticProps: GetStaticProps = async () => {
     const response = await stripe.products.list({
-        expand: ["data.default_price"],
+        expand: ['data.default_price'],
     })
     // console.log(response.data)
 

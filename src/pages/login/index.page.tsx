@@ -1,11 +1,12 @@
-import { Input } from "@/components/Input"
-import * as yup from "yup"
-import { Wrapper } from "@/styles/global"
-import { Container, ContainerLogin } from "@/styles/pages/login"
-import { SubmitHandler, useForm } from "react-hook-form"
-import { yupResolver } from "@hookform/resolvers/yup"
+import { Input } from '@/components/Input'
+import * as yup from 'yup'
+import { Wrapper } from '@/styles/global'
+import { Container, ContainerLogin } from '@/pages/login/styles'
+import { SubmitHandler, useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
 // import { useSession } from "next-auth/react"
-import { SignInGoogleButton } from "@/components/SignInGoogleButton"
+import { LoginOAuthButton } from '@/pages/login/components/LoginOAuthButton'
+import { GoogleLogo } from 'phosphor-react'
 
 // import { authOptions } from "../api/auth/[...nextauth]"
 // import { getServerSession } from "next-auth/next"
@@ -16,8 +17,8 @@ type SignInFormData = {
 }
 
 const signInFormSchema = yup.object().shape({
-    email: yup.string().required("Email required").email(),
-    password: yup.string().required("Password required"),
+    email: yup.string().required('Email required').email(),
+    password: yup.string().required('Password required'),
 })
 
 export default function Login() {
@@ -51,18 +52,30 @@ export default function Login() {
     return (
         <Wrapper>
             <Container>
-                <h1>Login</h1>
-
                 <ContainerLogin>
+                    <h2>Login</h2>
                     <form onSubmit={handleSubmit(handleSignIn)}>
-                        <Input label="E-mail" error={errors.email} type="email" {...register("email")} />
-                        <Input label="Password" error={errors.password} type="password" {...register("password")} />
+                        <Input
+                            label="E-mail"
+                            error={errors.email}
+                            type="email"
+                            {...register('email')}
+                        />
+                        <Input
+                            label="Password"
+                            error={errors.password}
+                            type="password"
+                            {...register('password')}
+                        />
 
-                        <button type="submit">Sign In</button>
+                        <button type="submit">Login</button>
                     </form>
 
-                    <span>or</span>
-                    <SignInGoogleButton />
+                    <span>or continue with</span>
+                    <LoginOAuthButton
+                        provider="google"
+                        icon={<GoogleLogo size={24} fill="bold" color="#BF5D28" />}
+                    />
                 </ContainerLogin>
             </Container>
         </Wrapper>

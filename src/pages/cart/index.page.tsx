@@ -1,4 +1,4 @@
-import { CircleNotch, Minus, Plus, ShoppingCartSimple, TrashSimple } from "phosphor-react"
+import { CircleNotch, Minus, Plus, ShoppingCartSimple, TrashSimple } from 'phosphor-react'
 import {
     Container,
     CartTable,
@@ -8,18 +8,18 @@ import {
     Total,
     ButtonCheckout,
     ContainerActions,
-} from "../../styles/pages/cart"
-import { useCart } from "@/contexts/cart"
-import Image from "next/image"
-import { useMemo, useState } from "react"
-import { priceFormatter } from "@/util/priceFormatter"
-import { Wrapper } from "@/styles/global"
-import { ButtonBackToCatalog } from "@/components/ButtonBackToCatalog"
-import { useSession } from "next-auth/react"
-import { useRouter } from "next/router"
-import { api } from "@/lib/axios"
-import { toast } from "react-toastify"
-import Head from "next/head"
+} from './styles'
+import { useCart } from '@/contexts/cart'
+import Image from 'next/image'
+import { useMemo, useState } from 'react'
+import { priceFormatter } from '@/utils/priceFormatter'
+import { Wrapper } from '@/styles/global'
+import { ButtonBackToCatalog } from '@/components/ButtonBackToCatalog'
+import { useSession } from 'next-auth/react'
+import { useRouter } from 'next/router'
+import { api } from '@/lib/axios'
+import { toast } from 'react-toastify'
+import Head from 'next/head'
 
 export default function Cart() {
     const { cart, updateProductAmount, removeProduct, clearCart } = useCart()
@@ -40,9 +40,9 @@ export default function Cart() {
     const handleCheckout = async () => {
         setIsCreatingCheckoutSession(true)
 
-        if (status !== "authenticated") {
-            router.push("/login", { query: "redirecttocart" })
-            toast.warning("Sign In with your account")
+        if (status !== 'authenticated') {
+            router.push('/login', { query: 'redirecttocart' })
+            toast.warning('Sign In with your account')
             return
         }
 
@@ -57,7 +57,7 @@ export default function Cart() {
         // console.log(cartToCheckout)
 
         try {
-            const response = await api.post("/checkout", {
+            const response = await api.post('/checkout', {
                 // userId: data.user.
                 products: cartToCheckout,
                 userId: data.user.id,
@@ -65,11 +65,12 @@ export default function Cart() {
 
             const { checkoutUrl } = response.data
             window.location.href = checkoutUrl
-            clearCart()
         } catch (error) {
             // conectar com uma ferramenta de observabilidade (datadog / sentry)
-            alert("Falha ao redirecionar para o checkout!")
+            alert('Falha ao redirecionar para o checkout!')
             setIsCreatingCheckoutSession(false)
+        } finally {
+            clearCart()
         }
     }
 
@@ -112,15 +113,17 @@ export default function Cart() {
                                                     {/* {product.amount} */}
                                                     {product.amount === 1 ? (
                                                         <ButtonHandleAmount
-                                                            type={"remove"}
-                                                            onClick={() => removeProduct(product.id)}
+                                                            type={'remove'}
+                                                            onClick={() =>
+                                                                removeProduct(product.id)
+                                                            }
                                                             title="Remove product"
                                                         >
                                                             <TrashSimple size={26} />
                                                         </ButtonHandleAmount>
                                                     ) : (
                                                         <ButtonHandleAmount
-                                                            type={"remove"}
+                                                            type={'remove'}
                                                             title="Remove - 1 quantity to the product"
                                                             onClick={() =>
                                                                 updateProductAmount({
@@ -134,7 +137,7 @@ export default function Cart() {
                                                     )}
                                                     {product.amount}
                                                     <ButtonHandleAmount
-                                                        type={"add"}
+                                                        type={'add'}
                                                         title="Add + 1 quantity to the product"
                                                         onClick={() =>
                                                             updateProductAmount({
@@ -173,7 +176,10 @@ export default function Cart() {
                                         <CircleNotch weight="bold" />
                                     </ButtonCheckout>
                                 ) : (
-                                    <ButtonCheckout disabled={isCreatingCheckoutSession} onClick={handleCheckout}>
+                                    <ButtonCheckout
+                                        disabled={isCreatingCheckoutSession}
+                                        onClick={handleCheckout}
+                                    >
                                         <ShoppingCartSimple weight="bold" size={20} />
                                         Checkout
                                     </ButtonCheckout>

@@ -1,154 +1,154 @@
-import { styled } from "@/styles/styles"
-import { keyframes } from "@stitches/react"
+import { styled } from '@/styles/styles'
+import { keyframes } from '@stitches/react'
 
-export const Container = styled("div", {
-    paddingBlock: ".8rem",
-    boxShadow: "0px 0px 20px -10px rgba(0,0,0,0.75)",
+export const Container = styled('div', {
+    paddingBlock: '.8rem',
+    boxShadow: '0px 0px 20px -10px rgba(0,0,0,0.75)',
     // zIndex: 10,
     top: 0,
-    width: "100%",
-    background: "#f2f3f5",
+    width: '100%',
+    background: '#f2f3f5',
     // marginBottom: "4rem",
-    paddingInline: "1rem",
-    position: "fixed",
+    paddingInline: '1rem',
+    position: 'fixed',
 
-    "@bp1": {
+    '@bp1': {
         // marginBottom: "2rem",
     },
 })
 
-export const ContainerWrapper = styled("nav", {
-    maxWidth: "1200px",
+export const ContainerWrapper = styled('nav', {
+    maxWidth: '1200px',
     // maxWidth: "100vw",
-    margin: "0 auto",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
+    margin: '0 auto',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
 
-    "@bp1": {
+    '@bp1': {
         // justifyContent: "space-around",
 
         img: {
-            width: "4rem",
+            width: '4rem',
             // height: "4rem",
         },
     },
 })
 
-export const BoxSearch = styled("label", {
-    display: "flex",
-    alignItems: "center",
-    width: "24rem",
+export const BoxSearch = styled('label', {
+    display: 'flex',
+    alignItems: 'center',
+    width: '24rem',
     // background: "gray",
     borderRadius: 4,
-    overflow: "hidden",
+    overflow: 'hidden',
 
     input: {
         flex: 1,
-        border: "none",
-        padding: ".2rem .6rem",
-        outline: "none",
-        fontSize: "1rem",
-        height: "1.8rem",
+        border: 'none',
+        padding: '.2rem .6rem',
+        outline: 'none',
+        fontSize: '1rem',
+        height: '1.8rem',
         // overflow: "hidden",
     },
 
     button: {
-        width: "4rem",
+        width: '4rem',
         // paddingInline: ".4rem",
-        border: "none",
-        height: "1.8rem",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
+        border: 'none',
+        height: '1.8rem',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
 
-        "&:hover": {
+        '&:hover': {
             // opacity: 0.5,
-            cursor: "pointer",
+            cursor: 'pointer',
         },
     },
 
-    "@bp1": {
-        width: "14rem",
+    '@bp1': {
+        width: '14rem',
 
         input: {
-            width: "12rem",
+            width: '12rem',
         },
         button: {
-            width: "2rem",
+            width: '2rem',
         },
     },
 })
 
-export const ContainerNav = styled("ul", {
-    display: "flex",
-    alignItems: "center",
-    gap: ".6rem",
+export const ContainerNav = styled('ul', {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '.6rem',
     border: 0,
 
     svg: {
-        color: "#008490",
+        color: '#008490',
     },
 
-    "button:hover": {
-        filter: "none",
-        background: "$gray300",
+    'button:hover': {
+        filter: 'none',
+        background: '$gray300',
         // lineHeight: "0",
         // fontSize: "0",
         // padding: ".2rem",
     },
 
     li: {
-        listStyle: "none",
+        listStyle: 'none',
         border: 0,
         // background: "blue",
         // borderRadius: 4,
-        padding: ".2rem",
+        padding: '.2rem',
     },
 
-    "li:hover": {
-        filter: "initial !important",
-        cursor: "pointer",
-        background: "$gray300",
+    'li:hover': {
+        filter: 'initial !important',
+        cursor: 'pointer',
+        background: '$gray300',
         // transition: "filter 0.2s",
     },
 
-    "li a:nth-child(1)": {
-        position: "relative",
+    'li a:nth-child(1)': {
+        position: 'relative',
 
         span: {
-            background: "#E52626",
-            width: "7px",
-            height: "7px",
+            background: '#E52626',
+            width: '7px',
+            height: '7px',
             // fontSize: "1rem",
-            top: "-5px",
-            left: "18px",
-            borderRadius: "50%",
-            position: "absolute",
-            color: "transparent",
+            top: '-5px',
+            left: '18px',
+            borderRadius: '50%',
+            position: 'absolute',
+            color: 'transparent',
         },
     },
 })
 
 const scaleUp = keyframes({
-    "0%": { transform: "translateX(100%)" },
-    "50%": { transform: "translateX(50%)" },
-    "100%": { transform: "translateX(0%)" },
+    '0%': { transform: 'translateX(100%)' },
+    '50%': { transform: 'translateX(50%)' },
+    '100%': { transform: 'translateX(0%)' },
 })
 
-export const MenuRight = styled("div", {
-    background: "blue",
-    width: "60vw",
-    height: "100%",
-    position: "fixed",
+export const MenuRight = styled('div', {
+    background: 'blue',
+    width: '60vw',
+    height: '100%',
+    position: 'fixed',
     zIndex: 1,
     right: 0,
     top: 0,
-    overflowX: "hidden",
-    transform: "translateX(100%)",
+    overflowX: 'hidden',
+    transform: 'translateX(100%)',
 
-    "&[data-menu-active=true]": {
-        transform: "translateX(0%)",
+    '&[data-menu-active=true]': {
+        transform: 'translateX(0%)',
         // transition: "all 1000ms",
         transition: `${scaleUp} 3000ms`,
         // animationDuration: "1000ms",

@@ -1,8 +1,8 @@
-import * as Popover from "@radix-ui/react-popover"
-import { PopoverTrigger, PopoverContent, Container } from "./styles"
-import { SignOut, User, UserCircle } from "phosphor-react"
-import { signOut, useSession } from "next-auth/react"
-import Link from "next/link"
+import * as Popover from '@radix-ui/react-popover'
+import { PopoverTrigger, PopoverContent, Container } from './styles'
+import { SignOut, User, UserCircle } from 'phosphor-react'
+import { signOut, useSession } from 'next-auth/react'
+import Link from 'next/link'
 
 export function UserPopover() {
     const { data, status } = useSession()
@@ -18,28 +18,31 @@ export function UserPopover() {
                 <PopoverContent>
                     {/* <PopoverClose><X size={18} /></PopoverClose> */}
                     <Container>
-                        {status === "unauthenticated" ? (
+                        {status === 'unauthenticated' ? (
                             <>
-                                <span>You are not signed in</span>
+                                {/* <span>You are not signed in</span> */}
                                 <Link href="/login">
                                     <button type="button">
-                                        <UserCircle weight="light" />
-                                        Sign in
+                                        <UserCircle />
+                                        Login
                                     </button>
                                 </Link>
                             </>
                         ) : (
                             <>
-                                <span> Hey, {data?.user?.name}</span>
-                                <Link href="/me">
+                                <span>
+                                    {' '}
+                                    Logged in as <br /> {data?.user?.name}
+                                </span>
+                                <Link href="/account">
                                     <button type="button">
-                                        <UserCircle weight="light" />
+                                        <UserCircle />
                                         My account
                                     </button>
                                 </Link>
                                 <button type="button" onClick={() => signOut()}>
-                                    <SignOut weight="light" />
-                                    Sign out
+                                    <SignOut />
+                                    Logout
                                 </button>
                             </>
                         )}

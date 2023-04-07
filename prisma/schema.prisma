@@ -2,7 +2,6 @@ datasource db {
   provider     = "mysql"
   url          = env("DATABASE_URL")
   relationMode = "prisma"
-  // shadowDatabaseUrl = env("SHADOW_DATABASE_URL") // Only needed when using a cloud provider that doesn't support the creation of new databases, like Heroku. Learn more: https://pris.ly/migrate-shadow
 }
 
 generator client {
@@ -66,8 +65,6 @@ model Order {
 
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String
-
-  // customerId  String
 
   OrderProducts OrderProducts[]
 

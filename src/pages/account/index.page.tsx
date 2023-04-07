@@ -1,13 +1,12 @@
-import { Wrapper } from "@/styles/global"
-import { Container, ContainerUserData, ContainerUserOrders } from "@/styles/pages/me"
-import { GetServerSideProps } from "next"
-import { getServerSession } from "next-auth"
-import { useSession } from "next-auth/react"
-import Image from "next/image"
-import { useRouter } from "next/router"
-import { authOptions } from "../api/auth/[...nextauth]"
-import { prisma } from "@/lib/prisma"
-// import { api } from "@/lib/axios"
+import { Wrapper } from '@/styles/global'
+import { Container, ContainerUserData, ContainerUserOrders } from '@/pages/account/styles'
+import { GetServerSideProps } from 'next'
+import { getServerSession } from 'next-auth'
+import { useSession } from 'next-auth/react'
+import Image from 'next/image'
+
+import { authOptions } from '../api/auth/[...nextauth].api'
+import { prisma } from '@/lib/prisma'
 
 interface IOrderProduct {
     id: string
@@ -20,32 +19,29 @@ interface IOrderProduct {
 interface IUserAccountProps {
     userOrders: {
         id: string
-        // createdAt: string
+        createdAt: string
         orderProducts: IOrderProduct[]
     }[]
 }
 
 export default function UserAccount({ userOrders }: IUserAccountProps) {
-    console.log(userOrders)
     const { data } = useSession()
-    const router = useRouter()
-
-    if (data === null) {
-        router.push("/login")
-    }
+    const user = data?.user ? data.user : null
 
     return (
         <Wrapper>
             <Container>
-                {data?.user?.image && <Image src={data?.user?.image} alt="" width={100} height={100} />}
+                {user?.image && <Image src={user?.image} alt="" width={100} height={100} />}
 
                 <ContainerUserData>
-                    {/* <span>Hi, {data?.user?.name}</span> */}
+                    <div>
+                        <h3>Account</h3>
+                        <ul>
+                            <li>{user?.name}</li>
+                            <li>{user?.email}</li>
+                        </ul>
+                    </div>
 
-                    <strong>Account</strong>
-
-                    <span>Name: {data?.user?.name}</span>
-                    <span>E-mail: {data?.user?.email}</span>
                     <ContainerUserOrders>
                         <h3>My Orders</h3>
                         <ul>
@@ -53,15 +49,16 @@ export default function UserAccount({ userOrders }: IUserAccountProps) {
                                 return (
                                     <li key={order.id}>
                                         <h4>Order {order.id}</h4>
-                                        {/* <time>{order.createdAt}</time> */}
+                                        <time>Created {order.createdAt}</time>
+
                                         <div className="products">
                                             {order.orderProducts.map((product) => {
                                                 return (
                                                     <div key={product.id}>
                                                         <Image
                                                             src={product.imageUrl}
-                                                            width={80}
-                                                            height={80}
+                                                            width={60}
+                                                            height={60}
                                                             alt={product.name}
                                                             quality={100}
                                                         />
@@ -84,7 +81,17 @@ export default function UserAccount({ userOrders }: IUserAccountProps) {
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
     const session = await getServerSession(ctx.req, ctx.res, authOptions)
-    // console.log(session)
+    console.log(session)
+
+    if (!session) {
+        return {
+            props: {},
+            redirect: {
+                destination: '/login',
+                permanent: false,
+            },
+        }
+    }
 
     const userOrders = await prisma.order.findMany({
         where: {

@@ -1,14 +1,18 @@
-import Link from "next/link"
-import { Button } from "./styles"
-import { ShoppingBag } from "phosphor-react"
+import Link from 'next/link'
+import { Button } from './styles'
+import { ShoppingBag } from 'phosphor-react'
 
-export function ButtonBackToCatalog() {
+interface ButtonBackToCatalogProps {
+    title?: string
+}
+
+export function ButtonBackToCatalog({ title = 'Catalog' }: ButtonBackToCatalogProps) {
     return (
-        <Link href="/" style={{ textDecoration: "none" }}>
+        <Link href="/" style={{ textDecoration: 'none' }}>
             <Button>
-                {" "}
+                {' '}
                 <ShoppingBag size={20} weight="bold" />
-                Catalog
+                {title}
             </Button>
         </Link>
     )
