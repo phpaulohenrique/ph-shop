@@ -26,7 +26,7 @@ Next.js FullStack E-commerce
 - Stitches
 - RadixUi
 
-## Some Screenshots 📸
+## Screenshots 📷
 
 <br>
 
