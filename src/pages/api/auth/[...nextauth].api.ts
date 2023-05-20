@@ -32,8 +32,8 @@ export const authOptions: NextAuthOptions = {
             //         id: true,
             //     },
             // })
-            // console.log("oooooooooooooooo")
-            console.log(user)
+            // ("oooooooooooooooo")
+            (user)
 
             // if (!customer && user.name && user.email) {
             //     customer = await prisma.customer.create({

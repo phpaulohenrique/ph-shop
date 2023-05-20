@@ -4,9 +4,7 @@ import { styled } from '../../styles/styles'
 export const ProductContainer = styled('main', {
     display: 'grid',
     gridTemplateColumns: '1fr 1fr',
-    // alignItems: "stretch",
     gap: '1rem',
-    // maxWidth: "100vw",
 
     '@bp1': {
         gridTemplateColumns: '1fr',
@@ -27,10 +25,6 @@ export const ImageContainer = styled('div', {
     img: {
         objectFit: 'cover',
         borderRadius: 8,
-
-        '&:hover': {
-            scale: '110%',
-        },
     },
 
     '@bp1': {

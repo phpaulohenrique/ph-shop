@@ -11,8 +11,6 @@ import { IsMobile } from '../IsMobile'
 import { SideBarMenu } from '../SideBarMenu'
 
 export function Header() {
-    // const { data } = useSession()
-    // const [isMenuOpen, setIsMenuOpen] = useState(false)
     const router = useRouter()
 
     const { cart } = useCart()
@@ -45,12 +43,11 @@ export function Header() {
                             type="text"
                             name="search"
                             id="search"
-                            // value=""
+                            placeholder="Search"
                             ref={inputSearchRef}
-                            // onChange={(event) => setSearch(event.target.value)}
                         />
-                        <button title="search">
-                            <MagnifyingGlass size={isMobile ? 18 : 20} />
+                        <button title="search" type="submit">
+                            <MagnifyingGlass size={isMobile ? 18 : 20} weight="bold" />
                         </button>
                     </BoxSearch>
                 </form>

@@ -13,7 +13,7 @@ export const Container = styled('div', {
 
 export const ContainerProducts = styled('main', {
     display: 'flex',
-    gap: '1rem',
+    gap: '2rem',
     flexWrap: 'wrap',
 
     a: {

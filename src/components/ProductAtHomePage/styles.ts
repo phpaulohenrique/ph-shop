@@ -1,16 +1,13 @@
 import { styled } from '@/styles/styles'
 
 export const Container = styled('div', {
-    // background: "red",
-    padding: '1rem 1rem',
-    // width: "10rem",
+    // padding: '1rem .4rem',
     borderRadius: 8,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'column',
-    // border: "1px solid blue",
-    // border: "1px solid blue",
+
     color: '$gray800',
 
     img: {

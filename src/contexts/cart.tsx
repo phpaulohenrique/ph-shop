@@ -41,7 +41,7 @@ export function CartProvider({ children }: CartProviderProps) {
         const storagedCart = localStorage.getItem('@PHShop:cart')
 
         if (storagedCart) {
-            // console.log(storagedCart)
+            // (storagedCart)
             return JSON.parse(storagedCart)
         }
         return []

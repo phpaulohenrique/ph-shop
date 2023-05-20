@@ -3,10 +3,8 @@ import { styled } from '../../styles/styles'
 
 export const Container = styled('div', {
     maxWidth: '900px',
-    // margin: "0 auto",
-    // marginTop: "4rem",
-    // background: "blue",
     paddingBottom: '4rem',
+    width: '100%',
 
     '> span': {
         marginBlock: '2rem 1rem',
@@ -18,8 +16,6 @@ export const Container = styled('div', {
 
     display: 'flex',
     flexDirection: 'column',
-    // gridTemplateColumns: "200px 1fr",
-    // gap: "2rem",
 
     '@bp1': {
         overflow: 'auto',
@@ -51,22 +47,16 @@ export const CartTable = styled('table', {
     },
 
     td: {
-        // borderTopLeftRadius: "1rem",
         border: 0,
         backgroundColor: '$gray200',
         padding: '.6rem 1.2rem',
         height: '6rem',
     },
 
-    'table, th, td': {
-        // border: "1px solid black",
-        // borderColor: "$gray300",
-        // borderCollapse: "collapse",
-    },
+    'table, th, td': {},
 
     'tr td:first-child': {
         textAlign: 'left',
-        // background: "red",
     },
 
     'th:nth-child(1)': {
@@ -86,18 +76,11 @@ export const CartTable = styled('table', {
 })
 
 export const TdProduct = styled('td', {
-    // display: "flex",
-    // flexDirection: "column",
-    // position: "relative",
-
     img: {
         borderRadius: 4,
     },
 
     span: {
-        // marginBottom: "1rem",
-        // display: "inline-block",
-        // textAlign: "center",
         fontSize: '$sm',
         position: 'absolute',
         marginLeft: '1rem',
@@ -109,7 +92,6 @@ export const TdProduct = styled('td', {
             margin: 0,
             fontSize: '$xsm',
         },
-        // display: "flex",
     },
 })
 
@@ -117,14 +99,8 @@ export const TdAmount = styled('td', {
     display: 'flex',
     gap: '.6rem',
     justifyContent: 'center',
-    // alignItems: "streeth",
-    // flexDirection: "row",
-    // border: "none",
     alignItems: 'center',
-    // borderCollapse: "collapse",
-    // borderColor: "transparent",
-    // padding: "1rem",
-    // width: "100%",
+
     height: '6rem',
 
     '@bp1': {
@@ -182,7 +158,6 @@ const rotate = keyframes({
 })
 
 export const ButtonCheckout = styled('button', {
-    // marginTop: "1rem",
     backgroundColor: '$green500',
     border: 0,
     color: '$white',
@@ -193,9 +168,6 @@ export const ButtonCheckout = styled('button', {
     fontSize: '$sm',
     width: '16rem',
     height: '2.6rem',
-
-    // marginLeft: "auto",
-    // display: "inline-block",
 
     display: 'flex',
     alignItems: 'center',
@@ -210,7 +182,6 @@ export const ButtonCheckout = styled('button', {
         svg: {
             animation: `${rotate} 1s infinite`,
             width: '1.4rem',
-            // height: "1.4rem",
         },
     },
 })

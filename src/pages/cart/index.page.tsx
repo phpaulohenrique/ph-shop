@@ -27,8 +27,6 @@ export default function Cart() {
     const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] = useState(false)
     const router = useRouter()
 
-    console.log(data)
-
     const total = useMemo(
         () =>
             cart.reduce((acc, currentTotal) => {
@@ -46,15 +44,12 @@ export default function Cart() {
             return
         }
 
-        // console.log(cart)
         const cartToCheckout = cart.map((product) => {
             return {
                 price: product.defaultPriceId,
                 quantity: product.amount,
             }
         })
-
-        // console.log(cartToCheckout)
 
         try {
             const response = await api.post('/checkout', {

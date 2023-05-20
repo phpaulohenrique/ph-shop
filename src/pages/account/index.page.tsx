@@ -7,6 +7,7 @@ import Image from 'next/image'
 
 import { authOptions } from '../api/auth/[...nextauth].api'
 import { prisma } from '@/lib/prisma'
+import { dateFormatter } from '@/utils/dateFormatter'
 
 interface IOrderProduct {
     id: string
@@ -81,7 +82,6 @@ export default function UserAccount({ userOrders }: IUserAccountProps) {
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
     const session = await getServerSession(ctx.req, ctx.res, authOptions)
-    console.log(session)
 
     if (!session) {
         return {
@@ -113,7 +113,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
         const productsFormatted = userOrders.map((order) => {
             return {
                 id: order.id,
-                createdAt: new Date(order.createdAt).toLocaleDateString(),
+                createdAt: dateFormatter(new Date(order.createdAt)),
                 orderProducts: order.OrderProducts.map((product) => {
                     return {
                         id: product.product?.id,

@@ -142,7 +142,7 @@ export const getStaticProps: GetStaticProps<any | undefined, { id: string }> = a
     params,
 }) => {
     const productId = params?.id
-    // console.log(productId)
+    // (productId)
 
     if (productId) {
         const product = await stripe.products.retrieve(productId, {

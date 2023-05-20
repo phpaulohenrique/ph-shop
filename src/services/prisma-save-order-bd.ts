@@ -51,7 +51,7 @@ export async function prismaSaveOrderBd({ productsBought, userId }: ISaveOrderBd
     // ]
 
     const productsBoughtId = productsBought.map((product) => product.id)
-    console.log(productsBoughtId)
+    (productsBoughtId)
 
     const productsAlreadyRegistered = await prisma.product.findMany({
         where: {

@@ -74,9 +74,7 @@ export const ContainerUserOrders = styled('section', {
         flexWrap: 'wrap',
         gap: '4rem',
         rowGap: '2rem',
-
-        // marginBlock: '1rem',
-        padding: '1rem 1.2rem',
+        padding: '1rem .4rem',
 
         span: {
             fontSize: '$xsm',

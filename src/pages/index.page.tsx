@@ -8,7 +8,6 @@ import { stripe } from '@/lib/stripe'
 import { priceFormatter } from '@/utils/priceFormatter'
 import { Wrapper } from '@/styles/global'
 import { useRouter } from 'next/router'
-// import { ButtonBackToCatalog } from "@/components/ButtonBackToCatalog"
 
 interface IHomeProps {
     products: {
@@ -20,14 +19,10 @@ interface IHomeProps {
 }
 
 export default function Home({ products }: IHomeProps) {
-    console.log(products)
     const router = useRouter()
     const search = router.query?.search ? String(router.query?.search).trim().toUpperCase() : ''
 
     const filteredProducts = products.filter((product) => product.name.includes(search))
-
-    const env = process.env.NODE_ENV
-    console.log(env)
 
     return (
         <>
@@ -36,9 +31,7 @@ export default function Home({ products }: IHomeProps) {
             </Head>
             <Wrapper>
                 <Container>
-                    <aside>
-                        <p>Filters</p>
-                    </aside>
+                    <aside>{/* <p>Filters</p> */}</aside>
                     <ContainerProducts>
                         {products
                             .filter((product) => product.name.includes(search))
@@ -51,7 +44,7 @@ export default function Home({ products }: IHomeProps) {
                             })}
                         {!filteredProducts.length && (
                             <>
-                                <span className="product-not-found">Product not found!</span>
+                                <span className="product-not-found">Ops, product not found!</span>
                             </>
                         )}
                     </ContainerProducts>
@@ -61,20 +54,10 @@ export default function Home({ products }: IHomeProps) {
     )
 }
 
-// export const getStaticPaths: GetStaticPaths = async () => {
-//     // buscar os produtos mais vendidos / mais acessados
-
-//     return {
-//         paths: [{ params: { id: "prod_NG86pgNulyIED4" } }],
-//         fallback: true,
-//     }
-// }
-
 export const getStaticProps: GetStaticProps = async () => {
     const response = await stripe.products.list({
         expand: ['data.default_price'],
     })
-    // console.log(response.data)
 
     const products = response.data.map((product) => {
         const price = product.default_price as Stripe.Price

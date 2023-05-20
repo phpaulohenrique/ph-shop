@@ -11,11 +11,7 @@ export const SideBarMenu = () => {
     const [open, setOpen] = useState(false)
 
     const session = useSession()
-    console.log(session.status)
-
     const unauthenticated = session.status !== 'authenticated'
-
-    // const closeMenu = () => {}
 
     return (
         <Dialog.Root open={open} onOpenChange={setOpen}>

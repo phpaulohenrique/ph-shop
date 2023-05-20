@@ -30,14 +30,14 @@ export default function Login() {
 
     const handleSignIn: SubmitHandler<SignInFormData> = async (values) => {
         await new Promise((resolve) => setTimeout(resolve, 2000))
-        console.log(values)
+        (values)
     }
 
     // const handleSignInWithASocialAccount = async (provider: BuiltInProviderType) => {
     //     await signIn(provider)
 
-    //     console.log(data)
-    //     console.log("oi")
+    //     (data)
+    //     ("oi")
 
     //     try {
     //         await api.post("/users", {
@@ -45,7 +45,7 @@ export default function Login() {
     //             email: data?.user?.email,
     //         })
     //     } catch (err) {
-    //         console.log(err)
+    //         (err)
     //     }
     // }
 

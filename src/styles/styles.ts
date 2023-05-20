@@ -1,6 +1,9 @@
 import { createStitches } from '@stitches/react'
 
 export const { styled, getCssText, globalCss } = createStitches({
+    media: {
+        bp1: '(max-width: 768px)',
+    },
     theme: {
         colors: {
             white: '#FFF',
@@ -28,8 +31,5 @@ export const { styled, getCssText, globalCss } = createStitches({
             xl: '1.5rem',
             '2xl': '2rem',
         },
-    },
-    media: {
-        bp1: '(max-width: 768px)',
     },
 })

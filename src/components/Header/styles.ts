@@ -4,33 +4,24 @@ import { keyframes } from '@stitches/react'
 export const Container = styled('div', {
     paddingBlock: '.8rem',
     boxShadow: '0px 0px 20px -10px rgba(0,0,0,0.75)',
-    // zIndex: 10,
     top: 0,
     width: '100%',
     background: '#f2f3f5',
-    // marginBottom: "4rem",
+
     paddingInline: '1rem',
     position: 'fixed',
-
-    '@bp1': {
-        // marginBottom: "2rem",
-    },
 })
 
 export const ContainerWrapper = styled('nav', {
     maxWidth: '1200px',
-    // maxWidth: "100vw",
     margin: '0 auto',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
 
     '@bp1': {
-        // justifyContent: "space-around",
-
         img: {
             width: '4rem',
-            // height: "4rem",
         },
     },
 })
@@ -39,7 +30,6 @@ export const BoxSearch = styled('label', {
     display: 'flex',
     alignItems: 'center',
     width: '24rem',
-    // background: "gray",
     borderRadius: 4,
     overflow: 'hidden',
 
@@ -48,29 +38,28 @@ export const BoxSearch = styled('label', {
         border: 'none',
         padding: '.2rem .6rem',
         outline: 'none',
-        fontSize: '1rem',
+        fontSize: '$sm',
         height: '1.8rem',
-        // overflow: "hidden",
+
+        '&::placeholder': {
+            fontSize: '$xsm',
+        },
     },
 
-    button: {
+    'button[type="submit"]': {
         width: '4rem',
-        // paddingInline: ".4rem",
         border: 'none',
         height: '1.8rem',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-
-        '&:hover': {
-            // opacity: 0.5,
-            cursor: 'pointer',
+        svg: {
+            color: '$gray800',
         },
     },
 
     '@bp1': {
         width: '14rem',
-
         input: {
             width: '12rem',
         },
