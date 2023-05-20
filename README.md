@@ -18,15 +18,19 @@ Next.js FullStack E-commerce
 
 ## Technologies 🔧
 
-- Next.js(React)
+- Next.js (React)
 - TypeScript
-- Prisma
+- Prisma (with MySQL)
 - NextAuth
 - Stripe
 - Stitches
-- RadixUi
+- RadixUI
+<br>
 
-## Some Screenshots 📸
+- Vercel (Front-end)
+- PlanetScale (BD)
+
+## Screenshots 📷
 
 <br>
 
