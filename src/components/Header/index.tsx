@@ -40,8 +40,9 @@ export function Header() {
                 <form onSubmit={handleSearch}>
                     <BoxSearch>
                         <input
-                            type="text"
+                            type="search"
                             name="search"
+                            aria-label="Search for products by name"
                             id="search"
                             placeholder="Search"
                             ref={inputSearchRef}
