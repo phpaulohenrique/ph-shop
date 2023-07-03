@@ -51,7 +51,6 @@ export async function prismaSaveOrderBd({ productsBought, userId }: ISaveOrderBd
     // ]
 
     const productsBoughtId = productsBought.map((product) => product.id)
-    (productsBoughtId)
 
     const productsAlreadyRegistered = await prisma.product.findMany({
         where: {

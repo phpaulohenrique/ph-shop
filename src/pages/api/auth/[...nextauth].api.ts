@@ -12,42 +12,13 @@ export const authOptions: NextAuthOptions = {
     ],
     callbacks: {
         async signIn({ account, user }) {
-            // const customer = await prisma.customer.create({
-            //     data: {
-            //         name: user.name,
-            //         email: user.email,
-            //     },
-            // })
-
             return true
         },
 
         async session({ session, user }) {
-            // const customer = "asdas"
-            // const userId = await prisma.user.findUnique({
-            //     where: {
-            //         email: user.email ?? undefined,
-            //     },
-            //     select: {
-            //         id: true,
-            //     },
-            // })
-            // ("oooooooooooooooo")
-            (user)
-
-            // if (!customer && user.name && user.email) {
-            //     customer = await prisma.customer.create({
-            //         data: {
-            //             name: user.name,
-            //             email: user.email,
-            //         },
-            //     })
-            // }
             return {
                 ...session,
                 user,
-                // user: { ...user, imgUrl: user.image },
-                // ...userId,
             }
         },
     },

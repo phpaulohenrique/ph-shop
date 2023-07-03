@@ -5,8 +5,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     // (req.body)
     const { products, userId } = req.body
 
-    (products)
-
     if (req.method !== 'POST') {
         return res.status(405).json({ error: 'Method not allowed' })
     }
@@ -24,8 +22,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         mode: 'payment',
         line_items: products,
     })
-
-    // await save()
 
     return res.status(201).json({
         checkoutUrl: checkoutSession.url,
